@@ -28,6 +28,6 @@ public class ScaryNightHandler {
 
     public static boolean isNightTime(World world) {
         long time = world.getWorldTime();
-        return time >= 13048 && time <= 22550;
+        return time > 13120 && time < 22100;
     }
 }
