@@ -1,7 +1,7 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "block/orientable",
+    "model": "orientable",
     "textures": {
       "top": "blocks/pumpkin_top",
       "front": "blocks/pumpkin_face_on",
@@ -10,7 +10,12 @@
     "transform": "forge:default-block"
   },
   "variants": {
-    "normal": [{}],
+    "facing": {
+      "east": { "y": 90 },
+      "north": {},
+      "south": { "y": 180 },
+      "west": { "y": 270 }
+    },
     "inventory": [{}]
   }
 }
