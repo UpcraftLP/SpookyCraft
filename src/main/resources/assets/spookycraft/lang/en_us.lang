@@ -1,0 +1,7 @@
+#PARSE_ESCAPES
+#########################
+#Blocks
+tile.haunted_pumpkin.name=Haunted Pumpkin
+
+#Misc
+itemGroup.spooky.name=SpookyCraft
