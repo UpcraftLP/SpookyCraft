@@ -14,7 +14,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -55,6 +54,7 @@ public class BlockHauntedPumpkin extends Block {
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));
@@ -75,7 +75,7 @@ public class BlockHauntedPumpkin extends Block {
         super.randomTick(worldIn, pos, state, random);
         if(!worldIn.isRemote && ScaryNightHandler.isNightTime(worldIn)) {
             worldIn.playSound(null, pos.getX() + 0.5D + random.nextInt(10) - 5, pos.getY(), pos.getZ() + 0.5D + random.nextInt(10) - 5, Utils.getRandomElementFromList(SOUNDS), SoundCategory.AMBIENT, 20.0f, random.nextFloat() * 0.6F + 0.4F);
-            WorldHelper.spawnParticles(worldIn, EnumParticleTypes.END_ROD, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, random.nextInt(30), 1.0D, 1.0D, 1.0D, 0.05D);
+            WorldHelper.spawnParticles(worldIn, EnumParticleTypes.END_ROD, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, random.nextInt(30), 1.0D, 0.6D, 1.0D, 0.05D);
         }
     }
 
