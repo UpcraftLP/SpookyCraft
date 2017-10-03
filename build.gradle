@@ -72,17 +72,19 @@ minecraft {
     makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 	
 	replace "@VERSION@", project.mod_version
-    replaceIn "Reference.java"
+    replace "@FINGERPRINTKEY@", "${project.public_key}".replace(":", "").toLowerCase(Locale.ROOT)
+    replaceIn "mod/upcraftlp/spookycraft/Reference.java"
 
     //auto-configure the run arguments
     clientRunArgs += "--username=${username}"
     if(project.hasProperty('dev_password')) {
-        clientRunArgs += " --password=${dev_password}"
+        clientRunArgs += "--password=${dev_password}"
     }
     serverRunArgs += "nogui" //mc server GUIs suck :P
 
     //add the coremod to the dev environment
     //clientJvmArgs += "-Dfml.coreMods.load="
+    //serverJvmArgs += "-Dfml.coreMods.load="
     serverJvmArgs += "-Dfml.queryResult=confirm"
 }
 
@@ -103,8 +105,6 @@ jar {
             "Implementation-Title": project.name,
             "Implementation-Version": "${project.mod_version}",
             "Built-On": "${project.mc_version}-${project.forge_version}",
-            "FMLCorePlugin": "core.upcraftlp.craftdev.asm.CraftDevLoadingPlugin",
-            "FMLCorePluginContainsFMLMod": "true",
             "FMLAT": "${project.mod_name}_at.cfg"
     )
 }
@@ -130,15 +130,20 @@ if (JavaVersion.current().isJava8Compatible()) {
 
 dependencies {
 
-    //compile against the JEI api/maven/
+    //compile against the JEI api
     compile "mezz.jei:jei_${project.mc_version}:${project.jei_version}:api"
 
     // at runtime, use the full JEI jar
     runtime "mezz.jei:jei_${project.mc_version}:${project.jei_version}"
+
+    //craftdev-core
+    compile "craftdev-core:craftdev-core-${project.mc_version}:${project.core_version}:deobf"
 }
-build.dependsOn signJar
+tasks.build.dependsOn signJar
+tasks.curseforge.dependsOn build
 
 def curseRelations = {
+    requiredLibrary 'craftdev-core'
     //optionalLibrary '' //add curseforge-slug here
 }
 
@@ -152,7 +157,7 @@ curseforge {
         changelog = getChangelogText()
         releaseType = "${project.release_type}"
 
-        //relations curseRelations //TODO uncomment this when adding curse relations
+        relations curseRelations
 
         //no such jars for now
         //addArtifact javadocJar
@@ -189,7 +194,7 @@ processResources
 }
 
 String getChangelogText() {
-    def changelogFile = new File('changelog.md')
+    def changelogFile = new File(project.projectDir, "changelog.md")
     String str = ''
     if(!changelogFile.exists()) {
         changelogFile.createNewFile()
