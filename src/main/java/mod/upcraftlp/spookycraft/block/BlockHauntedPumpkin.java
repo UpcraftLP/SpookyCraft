@@ -42,6 +42,7 @@ public class BlockHauntedPumpkin extends Block {
     public BlockHauntedPumpkin() {
         super("haunted_pumpkin", Material.GOURD, false);
         this.setTickRandomly(true);
+        this.setLightLevel(0.7F);
     }
 
     @Override
@@ -120,9 +121,4 @@ public class BlockHauntedPumpkin extends Block {
         }
     }
 
-    @Override
-    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
-        if(world instanceof World) return ScaryNightHandler.isNightTime(((World) world)) ? 7 : 0;
-        return 7;
-    }
 }
