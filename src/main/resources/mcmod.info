@@ -1,0 +1,16 @@
+[
+{
+  "modid": "spookycraft",
+  "name": "SpookyCraft",
+  "description": "SpookyCraft Mod",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://github.com/UpcraftLP/SpookyCraft",
+  "updateUrl": "",
+  "authorList": ["UpcraftLP", "EPIIC_THUNDERCAT", "Subaraki"],
+  "credits": "(C)2017 UpcraftLP, EPIIC_THUNDERCAT",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
