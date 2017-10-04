@@ -19,7 +19,7 @@ public class ScaryNightHandler {
     public static void onPlayerUpdate(TickEvent.PlayerTickEvent event) {
         World world = event.player.world;
         ItemStack stack = event.player.inventory.armorInventory.get(3);
-        if(!world.isRemote && isNightTime(world) && stack.getItem() == Item.getItemFromBlock(Blocks.PUMPKIN)) {
+        if(!world.isRemote && isNightTime(world) && stack.getItem() != Item.getItemFromBlock(Blocks.PUMPKIN)) {
             if(world.getTotalWorldTime() % (20 *10) == 0) {
                 //TODO spawn mob horde
             }
