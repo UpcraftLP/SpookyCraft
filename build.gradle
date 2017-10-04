@@ -72,7 +72,9 @@ minecraft {
     makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 	
 	replace "@VERSION@", project.mod_version
-    replace "@FINGERPRINTKEY@", "${project.public_key}".replace(":", "").toLowerCase(Locale.ROOT)
+    if(project.hasProperty('public_key')) {
+        replace "@FINGERPRINTKEY@", "${project.public_key}".replace(":", "").toLowerCase(Locale.ROOT)
+    }
     replaceIn "mod/upcraftlp/spookycraft/Reference.java"
 
     //auto-configure the run arguments
@@ -152,10 +154,10 @@ curseforge {
         apiKey = project.curse_key
 
     project {
-        id = "${project.curse_id}"
+        id = project.curse_id
         changelogType = 'markdown'
         changelog = getChangelogText()
-        releaseType = "${project.release_type}"
+        releaseType = project.release_type
 
         relations curseRelations
 
