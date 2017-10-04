@@ -1,6 +1,19 @@
 package mod.upcraftlp.spookycraft;
 
-import mod.upcraftlp.spookycraft.init.SpookyBlocks;
+import static mod.upcraftlp.spookycraft.Reference.CREDITS;
+import static mod.upcraftlp.spookycraft.Reference.DEPENDENCIES;
+import static mod.upcraftlp.spookycraft.Reference.MCVERSIONS;
+import static mod.upcraftlp.spookycraft.Reference.MODID;
+import static mod.upcraftlp.spookycraft.Reference.MODNAME;
+import static mod.upcraftlp.spookycraft.Reference.MOD_DESCRIPTION;
+import static mod.upcraftlp.spookycraft.Reference.UPDATE_JSON;
+import static mod.upcraftlp.spookycraft.Reference.VERSION;
+import static mod.upcraftlp.spookycraft.Reference.WEBSITE;
+import static mod.upcraftlp.spookycraft.Reference.authors;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import mod.upcraftlp.spookycraft.init.SpookyTabs;
 import mod.upcraftlp.spookycraft.proxy.Proxy;
 import net.minecraft.init.Blocks;
@@ -12,10 +25,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import static mod.upcraftlp.spookycraft.Reference.*;
 
 @Mod(
         certificateFingerprint = Reference.FINGERPRINT_KEY,
