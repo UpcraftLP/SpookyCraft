@@ -4,11 +4,15 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * @author UpcraftLP
+ * <b>SERVER-ONLY</b>
  */
-public class ServerProxy implements Proxy {
+@SideOnly(Side.SERVER)
+public class ServerProxy extends CommonProxy {
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {
