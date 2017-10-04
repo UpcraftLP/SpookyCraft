@@ -5,3 +5,11 @@ tile.haunted_pumpkin.name=Haunted Pumpkin
 
 #Misc
 itemGroup.spooky.name=SpookyCraft
+item.encyclopedia.name=Arcane Encyclopedia
+item.encyclopedia.name=Arcane Encyclopedia
+
+#Encyclopedia
+button.back.name=Back
+page.index.title=Index
+entry.pumpkins.caption=Pumpkins
+entry.pumpkins.hover=Spooky Decorations

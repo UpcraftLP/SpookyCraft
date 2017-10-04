@@ -1,0 +1,10 @@
+{
+  "name": "pumpkins_2",
+  "elements": [
+    {
+      "name": "index",
+      "icon": "minecraft:diamond",
+      "link": "spookycraft:index"
+    }
+  ]
+}
