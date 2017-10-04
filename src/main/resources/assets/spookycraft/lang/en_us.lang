@@ -8,6 +8,9 @@ item.glass_string.name=Glass String
 item.candy.name=Candy
 item.chocolate_bar.name=Chocolate Bar
 
+#Fluids
+fluids.spookycraft.bone_milk=Bone Milk
+
 #Misc
 itemGroup.spooky.name=SpookyCraft
 item.encyclopedia.name=Arcane Encyclopedia

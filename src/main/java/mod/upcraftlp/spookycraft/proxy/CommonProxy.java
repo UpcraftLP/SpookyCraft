@@ -4,6 +4,7 @@ import core.upcraftlp.craftdev.api.net.NetworkHandler;
 import core.upcraftlp.craftdev.api.util.UpdateChecker;
 import mod.upcraftlp.spookycraft.ModConfig;
 import mod.upcraftlp.spookycraft.Reference;
+import mod.upcraftlp.spookycraft.block.fluid.FluidBase;
 import mod.upcraftlp.spookycraft.net.PacketOpenDocs;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -27,6 +28,9 @@ public class CommonProxy {
 
     public void postInit(FMLPostInitializationEvent event) {
 
+        //cleanup
+        FluidBase.fluidBlocks = null;
+        FluidBase.fluids = null;
     }
 
     public void serverStarting(FMLServerStartingEvent event) {

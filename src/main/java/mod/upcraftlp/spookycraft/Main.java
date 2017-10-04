@@ -1,6 +1,7 @@
 package mod.upcraftlp.spookycraft;
 
 import mod.upcraftlp.spookycraft.proxy.CommonProxy;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ModMetadata;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -23,6 +24,10 @@ import static mod.upcraftlp.spookycraft.Reference.*;
         updateJSON = UPDATE_JSON
 )
 public class Main {
+
+    static {
+        FluidRegistry.enableUniversalBucket(); //MUST be called before preInit!
+    }
 
     @Mod.Instance(MODID)
     public static Main INSTANCE;
