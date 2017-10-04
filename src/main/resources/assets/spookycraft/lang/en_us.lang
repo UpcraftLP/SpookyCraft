@@ -3,6 +3,11 @@
 #Blocks
 tile.haunted_pumpkin.name=Haunted Pumpkin
 
+#Items
+item.glass_string.name=Glass String
+item.candy.name=Candy
+item.chocolate_bar.name=Chocolate Bar
+
 #Misc
 itemGroup.spooky.name=SpookyCraft
 item.encyclopedia.name=Arcane Encyclopedia
