@@ -19,21 +19,22 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {
+        super.preInit(event);
         SpookyTabs.SPOOKY_TAB.setIconStack(new ItemStack(Blocks.LIT_PUMPKIN)); //TODO different icon?
     }
 
     @Override
     public void init(FMLInitializationEvent event) {
-
+        super.init(event);
     }
 
     @Override
     public void postInit(FMLPostInitializationEvent event) {
-
+        super.postInit(event);
     }
 
     @Override
     public void serverStarting(FMLServerStartingEvent event) {
-
+        super.serverStarting(event);
     }
 }
