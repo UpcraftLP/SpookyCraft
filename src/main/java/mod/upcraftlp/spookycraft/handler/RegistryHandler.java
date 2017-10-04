@@ -21,6 +21,7 @@ public class RegistryHandler {
     @SubscribeEvent
     public static void onRegisterBlocks(RegistryEvent.Register<Block> event) {
         RegistryUtils.createRegistryEntries(Block.class, event, SpookyBlocks.class, Reference.MODID, SpookyTabs.SPOOKY_TAB);
+        event.getRegistry().register(SpookyBlocks.Special.HAUNTED_PUMPKIN);
     }
 
     @SubscribeEvent

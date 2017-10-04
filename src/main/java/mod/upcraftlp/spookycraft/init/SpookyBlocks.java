@@ -11,5 +11,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 @GameRegistry.ObjectHolder(Reference.MODID)
 public class SpookyBlocks {
 
-    public static final Block HAUNTED_PUMPKIN = new BlockHauntedPumpkin();
+    public static class Special { //FIXME workaround for craftdevcore issue, will be fixed in core v2.2.7
+        public static final Block HAUNTED_PUMPKIN = new BlockHauntedPumpkin();
+    }
 }
