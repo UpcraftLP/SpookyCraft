@@ -16,8 +16,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static mod.upcraftlp.spookycraft.Reference.*;
-
 @Mod(
         certificateFingerprint = Reference.FINGERPRINT_KEY,
         name = MODNAME,
