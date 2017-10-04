@@ -1,5 +1,10 @@
 package mod.upcraftlp.spookycraft.entity;
 
+import java.awt.Color;
+
+import mod.upcraftlp.spookycraft.Reference;
+import net.minecraft.util.ResourceLocation;
+
 public class ModEntities {
 	public static void init() {
 		int femalesharkegg = new Color(254, 85, 176).getRGB();
@@ -37,6 +42,6 @@ public class ModEntities {
 	}
 
 	private static ResourceLocation getEntityResource(String entityName) {
-		return new ResourceLocation(Reference.ID, entityName);
+		return new ResourceLocation(Reference.MODID, entityName);
 	}
 }
