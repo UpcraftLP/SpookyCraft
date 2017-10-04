@@ -3,7 +3,6 @@ package mod.upcraftlp.spookycraft.net;
 import io.netty.buffer.ByteBuf;
 import mod.upcraftlp.spookycraft.client.gui.GuiEncyclopedia;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -17,7 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  */
 public class PacketOpenDocs implements IMessage, IMessageHandler<PacketOpenDocs, IMessage> {
 
-    public ResourceLocation page = TextureMap.LOCATION_MISSING_TEXTURE;
+    public ResourceLocation page = new ResourceLocation("missingno"); //See TextureMap.LOCATION_MISSING_TEXTURE
 
     public PacketOpenDocs(ResourceLocation page) {
         if(page != null) this.page = page;

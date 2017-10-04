@@ -23,8 +23,7 @@ public class ItemEncyclopedia extends Item {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        //TODO get current page from settings
-        if(!worldIn.isRemote && playerIn instanceof EntityPlayerMP) NetworkHandler.INSTANCE.sendTo(new PacketOpenDocs(null), (EntityPlayerMP) playerIn);
+        if(!worldIn.isRemote && playerIn instanceof EntityPlayerMP) NetworkHandler.INSTANCE.sendTo(new PacketOpenDocs(null), (EntityPlayerMP) playerIn); //TODO get current page from settings
         return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
 }
