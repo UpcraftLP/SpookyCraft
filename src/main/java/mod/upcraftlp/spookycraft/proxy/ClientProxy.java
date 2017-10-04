@@ -1,6 +1,12 @@
 package mod.upcraftlp.spookycraft.proxy;
 
+import mod.upcraftlp.spookycraft.client.renderer.RenderMirror;
+import mod.upcraftlp.spookycraft.client.renderer.RenderScareCrow;
+import mod.upcraftlp.spookycraft.entity.different.EntityMirror;
+import mod.upcraftlp.spookycraft.entity.monster.EntityScareCrow;
 import mod.upcraftlp.spookycraft.init.SpookyTabs;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -11,30 +17,38 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- * @author UpcraftLP
- * <b>CLIENT-ONLY</b>
+ * @author UpcraftLP <b>CLIENT-ONLY</b>
  */
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
 
-    @Override
-    public void preInit(FMLPreInitializationEvent event) {
-        super.preInit(event);
-        SpookyTabs.SPOOKY_TAB.setIconStack(new ItemStack(Blocks.LIT_PUMPKIN)); //TODO different icon?
-    }
+	@Override
+	public void preInit(FMLPreInitializationEvent event) {
+		super.preInit(event);
+		SpookyTabs.SPOOKY_TAB.setIconStack(new ItemStack(Blocks.LIT_PUMPKIN)); // TODO
+																				// different
+																				// icon?
+	}
 
-    @Override
-    public void init(FMLInitializationEvent event) {
-        super.init(event);
-    }
+	@Override
+	public void init(FMLInitializationEvent event) {
 
-    @Override
-    public void postInit(FMLPostInitializationEvent event) {
-        super.postInit(event);
-    }
+		super.init(event);
 
-    @Override
-    public void serverStarting(FMLServerStartingEvent event) {
-        super.serverStarting(event);
-    }
+		RenderManager rm = Minecraft.getMinecraft().getRenderManager();
+
+		rm.entityRenderMap.put(EntityScareCrow.class, new RenderScareCrow(rm));
+		rm.entityRenderMap.put(EntityMirror.class, new RenderMirror(rm));
+
+	}
+
+	@Override
+	public void postInit(FMLPostInitializationEvent event) {
+		super.postInit(event);
+	}
+
+	@Override
+	public void serverStarting(FMLServerStartingEvent event) {
+		super.serverStarting(event);
+	}
 }
