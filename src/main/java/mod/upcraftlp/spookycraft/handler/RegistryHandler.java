@@ -6,7 +6,6 @@ import mod.upcraftlp.spookycraft.init.SpookyBlocks;
 import mod.upcraftlp.spookycraft.init.SpookyItems;
 import mod.upcraftlp.spookycraft.init.SpookyTabs;
 import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;

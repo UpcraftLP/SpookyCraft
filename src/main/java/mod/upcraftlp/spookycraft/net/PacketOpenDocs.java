@@ -1,8 +1,6 @@
 package mod.upcraftlp.spookycraft.net;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufUtil;
-import mod.upcraftlp.spookycraft.Reference;
 import mod.upcraftlp.spookycraft.client.gui.GuiEncyclopedia;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureMap;

@@ -1,12 +1,8 @@
 package mod.upcraftlp.spookycraft.util;
 
 import mod.upcraftlp.spookycraft.Main;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.nbt.JsonToNBT;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTUtil;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -16,8 +12,6 @@ import org.apache.commons.io.IOUtils;
 import java.io.BufferedInputStream;
 import java.util.Locale;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author UpcraftLP

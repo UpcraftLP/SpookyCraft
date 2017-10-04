@@ -2,7 +2,6 @@ package mod.upcraftlp.spookycraft;
 
 import com.google.common.collect.Lists;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.common.ForgeVersion;
 
 import java.time.Year;
 import java.util.List;
