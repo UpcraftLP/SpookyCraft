@@ -38,21 +38,13 @@
     ],
     "facing=east": [
       { "textures": { "front": "minecraft:blocks/pumpkin_face_off" }, "y": 90 },
+      { "textures": { "front": "spookycraft:blocks/pumpkin/pumpkin_0_off" }, "y": 90 },
       { "textures": { "front": "spookycraft:blocks/pumpkin/pumpkin_1_off" }, "y": 90 },
       { "textures": { "front": "spookycraft:blocks/pumpkin/pumpkin_2_off" }, "y": 90 },
       { "textures": { "front": "spookycraft:blocks/pumpkin/pumpkin_3_off" }, "y": 90 },
       { "textures": { "front": "spookycraft:blocks/pumpkin/pumpkin_4_off" }, "y": 90 },
-      { "textures": { "front": "spookycraft:blocks/pumpkin/pumpkin_5_off" }, "y": 90 },
-      { "textures": { "front": "spookycraft:blocks/pumpkin/pumpkin_6_off" }, "y": 90 }
+      { "textures": { "front": "spookycraft:blocks/pumpkin/pumpkin_5_off" }, "y": 90 }
     ],
-    "inventory": [
-      { "textures": { "front": "minecraft:blocks/pumpkin_face_off" } },
-      { "textures": { "front": "spookycraft:blocks/pumpkin/pumpkin_1_off" } },
-      { "textures": { "front": "spookycraft:blocks/pumpkin/pumpkin_2_off" } },
-      { "textures": { "front": "spookycraft:blocks/pumpkin/pumpkin_3_off" } },
-      { "textures": { "front": "spookycraft:blocks/pumpkin/pumpkin_4_off" } },
-      { "textures": { "front": "spookycraft:blocks/pumpkin/pumpkin_5_off" } },
-      { "textures": { "front": "spookycraft:blocks/pumpkin/pumpkin_6_off" } }
-    ]
+    "inventory": [{ "textures": { "front": "minecraft:blocks/pumpkin_face_off" } }]
   }
 }

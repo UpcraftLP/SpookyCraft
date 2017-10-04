@@ -45,14 +45,6 @@
       { "textures": { "front": "spookycraft:blocks/pumpkin/pumpkin_5_on" }, "y": 90 },
       { "textures": { "front": "spookycraft:blocks/pumpkin/pumpkin_6_on" }, "y": 90 }
     ],
-    "inventory": [
-      { "textures": { "front": "minecraft:blocks/pumpkin_face_on" } },
-      { "textures": { "front": "spookycraft:blocks/pumpkin/pumpkin_1_on" } },
-      { "textures": { "front": "spookycraft:blocks/pumpkin/pumpkin_2_on" } },
-      { "textures": { "front": "spookycraft:blocks/pumpkin/pumpkin_3_on" } },
-      { "textures": { "front": "spookycraft:blocks/pumpkin/pumpkin_4_on" } },
-      { "textures": { "front": "spookycraft:blocks/pumpkin/pumpkin_5_on" } },
-      { "textures": { "front": "spookycraft:blocks/pumpkin/pumpkin_6_on" } }
-    ]
+    "inventory": [{ "textures": { "front": "minecraft:blocks/pumpkin_face_on" } }]
   }
 }
