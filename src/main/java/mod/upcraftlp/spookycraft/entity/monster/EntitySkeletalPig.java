@@ -199,7 +199,7 @@ public class EntitySkeletalPig extends EntitySkeletal {
 	}
 
 	public void travel(float strafe, float vertical, float forward) {
-		Entity entity = this.getPassengers().isEmpty() ? null : (Entity) this.getPassengers().get(0);
+		Entity entity = this.getPassengers().isEmpty() ? null : this.getPassengers().get(0);
 
 		if (this.isBeingRidden() && this.canBeSteered()) {
 			this.rotationYaw = entity.rotationYaw;
@@ -257,7 +257,7 @@ public class EntitySkeletalPig extends EntitySkeletal {
 			this.boosting = true;
 			this.boostTime = 0;
 			this.totalBoostTime = this.getRNG().nextInt(841) + 140;
-			this.getDataManager().set(BOOST_TIME, Integer.valueOf(this.totalBoostTime));
+			this.getDataManager().set(BOOST_TIME, this.totalBoostTime);
 			return true;
 		}
 	}
