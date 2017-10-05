@@ -25,9 +25,9 @@ public class RegistryHandler {
     public static void onRegisterBlocks(RegistryEvent.Register<Block> event) {
         RegistryUtils.createRegistryEntries(Block.class, event, SpookyBlocks.class, Reference.MODID, SpookyTabs.SPOOKY_TAB);
         event.getRegistry().register(SpookyBlocks.Special.HAUNTED_PUMPKIN);
-        FluidRegistry.addBucketForFluid(SpookyFluids.BONE_MILK);
         for(FluidBase fluid : FluidBase.fluids) { //only register those fluids that haven't already been created by other mods
-            BlockFluidBase fluidBlock = new BlockFluidBase(fluid);
+            FluidRegistry.addBucketForFluid(fluid);
+            BlockFluidBase fluidBlock = fluid.createBlock();
             event.getRegistry().register(fluidBlock);
             FluidBase.fluidBlocks.add(fluidBlock);
         }

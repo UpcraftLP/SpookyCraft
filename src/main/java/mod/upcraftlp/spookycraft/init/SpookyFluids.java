@@ -1,6 +1,7 @@
 package mod.upcraftlp.spookycraft.init;
 
 import mod.upcraftlp.spookycraft.block.fluid.FluidBase;
+import mod.upcraftlp.spookycraft.block.fluid.FluidBoneMilk;
 import net.minecraftforge.fluids.Fluid;
 
 /**
@@ -8,5 +9,5 @@ import net.minecraftforge.fluids.Fluid;
  */
 public class SpookyFluids {
 
-    public static final Fluid BONE_MILK = FluidBase.create("bone_milk", 0xFFFFFF, false);
+    public static final Fluid BONE_MILK = FluidBase.create(FluidBoneMilk.class, "bone_milk", 0xFFFFFF, false);
 }

@@ -1,12 +1,14 @@
 package mod.upcraftlp.spookycraft.block.fluid;
 
 import com.google.common.collect.Lists;
+import jline.internal.Nullable;
 import mod.upcraftlp.spookycraft.Reference;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import java.awt.*;
+import java.lang.reflect.Constructor;
 import java.util.List;
 
 /**
@@ -21,9 +23,9 @@ public class FluidBase extends Fluid {
     private final boolean isHot;
 
     /**
-     * Constructor is {@code private}, use {@link FluidBase#create(String, int, boolean)} instead!
+     * Constructor is {@code private}, use {@link FluidBase#create(Class, String, int, boolean)} instead!
      */
-    private FluidBase(String name, int color, boolean isHot) {
+    protected FluidBase(String name, int color, boolean isHot) {
         super(name, new ResourceLocation(Reference.MODID, "blocks/fluidbase_still"), new ResourceLocation(Reference.MODID, "blocks/fluidbase_flow"));
         this.color = color;
         this.isHot = isHot;
@@ -45,14 +47,25 @@ public class FluidBase extends Fluid {
         return this.color;
     }
 
-    public static Fluid create(String name, byte red, byte green, byte blue, boolean isHot) {
-        return create(name, new Color(red, green, blue).getRGB(), isHot);
+    public static final Fluid create(@Nullable Class<? extends FluidBase> fluidClass, String name, byte red, byte green, byte blue, boolean isHot) {
+        return create(fluidClass, name, new Color(red, green, blue).getRGB(), isHot);
     }
 
-    public static Fluid create(String name, int color, boolean isHot) {
-        FluidBase fluid = new FluidBase(name, new Color(color).getRGB(), isHot);
-        boolean useOwnFluid = FluidRegistry.registerFluid(fluid);
-        if(useOwnFluid) fluids.add(fluid);
-        return useOwnFluid ? fluid : FluidRegistry.getFluid(name);
+    public static final Fluid create(@Nullable Class<? extends FluidBase> fluidClass, String name, int color, boolean isHot) {
+        try {
+            if(fluidClass == null) fluidClass = FluidBase.class;
+            Constructor<? extends FluidBase> c = fluidClass.getConstructor(String.class, Integer.TYPE, Boolean.TYPE);
+            FluidBase fluid = c.newInstance(name, color, isHot);
+            boolean useOwnFluid = FluidRegistry.registerFluid(fluid);
+            if(useOwnFluid) fluids.add(fluid);
+            return useOwnFluid ? fluid : FluidRegistry.getFluid(name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public BlockFluidBase createBlock() {
+        return new BlockFluidBase(this);
     }
 }
