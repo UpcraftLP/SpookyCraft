@@ -1,5 +1,6 @@
 package mod.upcraftlp.spookycraft.client.models.layers;
 
+import mod.upcraftlp.spookycraft.Reference;
 import mod.upcraftlp.spookycraft.client.renderer.skeletals.RenderSkeletalPig;
 import net.minecraft.client.model.ModelPig;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
@@ -10,7 +11,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class LayerSaddleSkeleton implements LayerRenderer<EntityPig> {
-	private static final ResourceLocation TEXTURE = new ResourceLocation("textures/entity/pig/pig_saddle.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(Reference.MODID,"textures/entity/skeletal_pig/pig_saddle.png");
 	private final RenderSkeletalPig pigRenderer;
 	private final ModelPig pigModel = new ModelPig(0.5F);
 

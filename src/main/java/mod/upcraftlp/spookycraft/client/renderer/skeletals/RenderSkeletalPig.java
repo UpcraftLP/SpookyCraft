@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RenderSkeletalPig extends RenderLiving<EntitySkeletalPig> {
 
 	private static final ResourceLocation SKELTAL_PIG_TEXTURES = new ResourceLocation(Reference.MODID,
-			"textures/entity/death_pig.png");
+			"textures/entity/skeletal_pig/death_pig.png");
 
 	public RenderSkeletalPig(RenderManager renderManagerIn) {
 		super(renderManagerIn, new ModelPig(), 0.7F);

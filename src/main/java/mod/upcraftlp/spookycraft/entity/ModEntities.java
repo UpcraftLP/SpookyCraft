@@ -6,11 +6,18 @@ import mod.upcraftlp.spookycraft.Main;
 import mod.upcraftlp.spookycraft.Reference;
 import mod.upcraftlp.spookycraft.entity.different.EntityMirror;
 import mod.upcraftlp.spookycraft.entity.monster.EntityScareCrow;
+import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletal;
+import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalBat;
+import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalChicken;
+import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalCow;
+import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalParrot;
+import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalPig;
 import net.minecraft.entity.EntityLiving.SpawnPlacementType;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class ModEntities {
@@ -19,36 +26,75 @@ public class ModEntities {
 
 		// Every entity in our mod has an ID (local to this mod)
 
-		//Scare Crow
+		// Scare Crow
 		EntityRegistry.registerModEntity(getEntityResource("ScareCrow"), EntityScareCrow.class, "ScareCrow", 0,
 				Main.INSTANCE, 80, 3, false, 956291, egg);
-		EntityRegistry.registerModEntity(getEntityResource("Mirror"), EntityMirror.class, "Mirror", 1,
+		// Mirror
+		EntityRegistry.registerModEntity(getEntityResource("Mirror"), EntityMirror.class, "Mirror", 1, Main.INSTANCE,
+				80, 3, false, 956291, egg);
+		// S Bat
+		EntityRegistry.registerModEntity(getEntityResource("SkeletalBat"), EntitySkeletalBat.class, "SkeletalBat", 2,
 				Main.INSTANCE, 80, 3, false, 956291, egg);
-		
+		// S Chicken
+		EntityRegistry.registerModEntity(getEntityResource("SkeletalChicken"), EntitySkeletalChicken.class,
+				"SkeletalChicken", 3, Main.INSTANCE, 80, 3, false, 956291, egg);
+		// S Cow
+		EntityRegistry.registerModEntity(getEntityResource("SkeletalCow"), EntitySkeletalCow.class, "SkeletalCow", 4,
+				Main.INSTANCE, 80, 3, false, 956291, egg);
+		// S Parrot
+		EntityRegistry.registerModEntity(getEntityResource("SkeletalParrot"), EntitySkeletalParrot.class,
+				"SkeletalParrot", 5, Main.INSTANCE, 80, 3, false, 956291, egg);
+		// S Pig
+		EntityRegistry.registerModEntity(getEntityResource("SkeletalPig"), EntitySkeletalPig.class, "SkeletalPig", 6,
+				Main.INSTANCE, 80, 3, false, 956291, egg);
+
 		/*
 		 * We want our mob to spawn in Plains and ice plains biomes. If you
 		 * don't add this then it will not spawn automatically but you can of
 		 * course still make it spawn manually
 		 */
 
-		//Scare Crow
+		// Scare Crow
 		EntityRegistry.addSpawn(EntityScareCrow.class, 100, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
-	
+		// S Bat
+		EntityRegistry.addSpawn(EntitySkeletalBat.class, 100, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+		// S Chicken
+		EntityRegistry.addSpawn(EntitySkeletalChicken.class, 100, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+		// S Cow
+		EntityRegistry.addSpawn(EntitySkeletalCow.class, 100, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+		// S Parrot
+		EntityRegistry.addSpawn(EntitySkeletalParrot.class, 100, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+		// S Pig
+		EntityRegistry.addSpawn(EntitySkeletalPig.class, 100, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+
 		/*
 		 * Mob Placement
 		 */
 
 		// Scare Crow
 		EntitySpawnPlacementRegistry.setPlacementType(EntityScareCrow.class, SpawnPlacementType.ON_GROUND);
+		// Mirror
 		EntitySpawnPlacementRegistry.setPlacementType(EntityMirror.class, SpawnPlacementType.ON_GROUND);
-		
+		// S Bat
+		EntitySpawnPlacementRegistry.setPlacementType(EntitySkeletalBat.class, SpawnPlacementType.IN_AIR);
+		// S Chicken
+		EntitySpawnPlacementRegistry.setPlacementType(EntitySkeletalChicken.class, SpawnPlacementType.ON_GROUND);
+		// S Cow
+		EntitySpawnPlacementRegistry.setPlacementType(EntitySkeletalCow.class, SpawnPlacementType.ON_GROUND);
+		// S Parrot
+		EntitySpawnPlacementRegistry.setPlacementType(EntitySkeletalParrot.class, SpawnPlacementType.IN_AIR);
+		// S Pig
+		EntitySpawnPlacementRegistry.setPlacementType(EntitySkeletalPig.class, SpawnPlacementType.ON_GROUND);
+
 		/*
 		 * This is the loot table for our mob
 		 */
 
 		// Scare Crow
-		//LootTableList.register(EntitySharkFemale.LOOT_FEMALESHARK);
-		
+		// LootTableList.register(EntitySharkFemale.LOOT_FEMALESHARK);
+		// Skeletals
+		LootTableList.register(EntitySkeletal.LOOT_SKELETAL);
+
 	}
 
 	private static ResourceLocation getEntityResource(String entityName) {
