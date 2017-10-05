@@ -9,5 +9,9 @@ import net.minecraftforge.fluids.Fluid;
  */
 public class SpookyFluids {
 
-    public static final Fluid BONE_MILK = FluidBase.create(FluidBoneMilk.class, "bone_milk", 0xFFFFFF, false);
+    public static Fluid BONE_MILK;
+
+    public static void init() {
+        BONE_MILK = FluidBase.create(FluidBoneMilk.class, "bone_milk", 0xFFFFFFFF, false);
+    }
 }

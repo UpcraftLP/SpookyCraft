@@ -54,7 +54,7 @@ public class FluidBase extends Fluid {
     public static final Fluid create(@Nullable Class<? extends FluidBase> fluidClass, String name, int color, boolean isHot) {
         try {
             if(fluidClass == null) fluidClass = FluidBase.class;
-            Constructor<? extends FluidBase> c = fluidClass.getConstructor(String.class, Integer.TYPE, Boolean.TYPE);
+            Constructor<? extends FluidBase> c = fluidClass.getDeclaredConstructor(String.class, int.class, boolean.class);
             FluidBase fluid = c.newInstance(name, color, isHot);
             boolean useOwnFluid = FluidRegistry.registerFluid(fluid);
             if(useOwnFluid) fluids.add(fluid);
