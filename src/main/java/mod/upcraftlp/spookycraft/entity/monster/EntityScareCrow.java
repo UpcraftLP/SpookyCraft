@@ -1,17 +1,10 @@
 package mod.upcraftlp.spookycraft.entity.monster;
 
 import mod.upcraftlp.spookycraft.Reference;
-import mod.upcraftlp.spookycraft.handler.SoundHandler;
+import mod.upcraftlp.spookycraft.init.SpookySounds;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -41,9 +34,9 @@ public class EntityScareCrow extends EntityMob {
 		this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 0.8D));
 		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(6, new EntityAILookIdle(this));
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
-		this.targetTasks.addTask(2, new EntityScareCrow.AIScarecrowTarget(this, EntityPlayer.class));
-		this.targetTasks.addTask(3, new EntityScareCrow.AIScarecrowTarget(this, EntityIronGolem.class));
+		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+		this.targetTasks.addTask(2, new EntityScareCrow.AIScarecrowTarget<>(this, EntityPlayer.class));
+		this.targetTasks.addTask(3, new EntityScareCrow.AIScarecrowTarget<>(this, EntityIronGolem.class));
 	}
 
 	static class AIScarecrowTarget<T extends EntityLivingBase> extends EntityAINearestAttackableTarget<T> {
@@ -55,24 +48,23 @@ public class EntityScareCrow extends EntityMob {
 		 * Returns whether the EntityAIBase should begin execution.
 		 */
 		public boolean shouldExecute() {
-			float f = this.taskOwner.getBrightness();
-			return f >= 0.5F ? false : super.shouldExecute();
+			return this.taskOwner.getBrightness() < 0.5F && super.shouldExecute();
 		}
 	}
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return SoundHandler.scarecrow_ambient.sound();
+		return SpookySounds.SCARECROW_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundHandler.scarecrow_hurt.sound();
+		return SpookySounds.SCARECROW_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundHandler.scarecrow_death.sound();
+		return SpookySounds.SCARECROW_DEATH;
 	}
 
 	@Override
