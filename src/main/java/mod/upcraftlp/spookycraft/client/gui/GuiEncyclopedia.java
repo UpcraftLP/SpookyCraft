@@ -11,6 +11,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiListExtended;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.command.CommandBase;
@@ -170,9 +171,8 @@ public class GuiEncyclopedia extends GuiScreen {
             mc.fontRenderer.drawString(caption, x + 18, y + (slotHeight - mc.fontRenderer.FONT_HEIGHT) / 2, Color.WHITE.getRGB());
             if(!this.icon.isEmpty()) {
                 GlStateManager.pushMatrix();
-                GlStateManager.enableLighting();
+                RenderHelper.enableGUIStandardItemLighting();
                 mc.getRenderItem().renderItemAndEffectIntoGUI(this.icon, x, y + 1);
-                GlStateManager.disableLighting();
                 GlStateManager.popMatrix();
             }
         }
