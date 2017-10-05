@@ -55,18 +55,19 @@ public class ModEntities {
 		 */
 
 		// Scare Crow
-		EntityRegistry.addSpawn(EntityScareCrow.class, 100, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+		EntityRegistry.addSpawn(EntityScareCrow.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
 		// S Bat
-		EntityRegistry.addSpawn(EntitySkeletalBat.class, 100, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+		EntityRegistry.addSpawn(EntitySkeletalBat.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
 		// S Chicken
-		EntityRegistry.addSpawn(EntitySkeletalChicken.class, 100, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+		EntityRegistry.addSpawn(EntitySkeletalChicken.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
 		// S Cow
-		EntityRegistry.addSpawn(EntitySkeletalCow.class, 100, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+		EntityRegistry.addSpawn(EntitySkeletalCow.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
 		// S Parrot
-		EntityRegistry.addSpawn(EntitySkeletalParrot.class, 100, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+		EntityRegistry.addSpawn(EntitySkeletalParrot.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.JUNGLE,Biomes.JUNGLE_EDGE,Biomes.JUNGLE_HILLS,Biomes.MUTATED_JUNGLE,Biomes.MUTATED_JUNGLE_EDGE);
 		// S Pig
-		EntityRegistry.addSpawn(EntitySkeletalPig.class, 100, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
-
+		EntityRegistry.addSpawn(EntitySkeletalPig.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+		
+		
 		/*
 		 * Mob Placement
 		 */
@@ -91,7 +92,7 @@ public class ModEntities {
 		 */
 
 		// Scare Crow
-		// LootTableList.register(EntitySharkFemale.LOOT_FEMALESHARK);
+		 LootTableList.register(EntityScareCrow.LOOT_CROW);
 		// Skeletals
 		LootTableList.register(EntitySkeletal.LOOT_SKELETAL);
 

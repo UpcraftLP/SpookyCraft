@@ -1,8 +1,12 @@
 package mod.upcraftlp.spookycraft.handler;
 
+import java.util.List;
+
 import com.google.common.collect.Lists;
+
 import core.upcraftlp.craftdev.api.util.Utils;
 import mod.upcraftlp.spookycraft.Reference;
+import mod.upcraftlp.spookycraft.entity.monster.EntityScareCrow;
 import mod.upcraftlp.spookycraft.util.EntityUtils;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityEnderman;
@@ -10,14 +14,11 @@ import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-
-import java.util.List;
 
 /**
  * @author UpcraftLP
@@ -25,7 +26,7 @@ import java.util.List;
 @Mod.EventBusSubscriber(modid = Reference.MODID)
 public class ScaryNightHandler {
 
-    private static final List<Class<? extends EntityLiving>> SPAWN_LIST = Lists.newArrayList(
+    public static final List<Class<? extends EntityLiving>> SPAWN_LIST = Lists.newArrayList(
             EntitySkeleton.class,
             EntityZombie.class,
             EntityEnderman.class
@@ -33,7 +34,7 @@ public class ScaryNightHandler {
             //TODO custom mobs
     );
 
-    private static final List<ItemStack> ALLOWED_HATS = Lists.newArrayList(
+    public static final List<ItemStack> ALLOWED_HATS = Lists.newArrayList(
             new ItemStack(Blocks.PUMPKIN)
     );
     static {

@@ -1,8 +1,10 @@
 package mod.upcraftlp.spookycraft.entity.monster;
 
 import mod.upcraftlp.spookycraft.Reference;
+import mod.upcraftlp.spookycraft.init.SpookyItems;
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -13,15 +15,18 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityIronGolem;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class EntitySkeletal extends EntityCreature {
+public class EntitySkeletal extends EntityMob {
 
 	public static final ResourceLocation LOOT_SKELETAL = new ResourceLocation(Reference.MODID, "entities/skeletal");
 
@@ -75,5 +80,21 @@ public class EntitySkeletal extends EntityCreature {
 	@Override
 	protected void playStepSound(BlockPos pos, Block blockIn) {
 		this.playSound(SoundEvents.ENTITY_SKELETON_STEP, 0.15F, 1.0F);
+	}
+	@Override
+	 public boolean hitByEntity(Entity entityIn)
+	    {
+		if (!this.world.isRemote) {
+			this.entityDropItem(new ItemStack(SpookyItems.CANDY_CORN, rand.nextInt(2)), 0.0F);
+			}
+	        return false;
+	    }
+	@Override
+	public void onDeath(DamageSource cause) {
+		super.onDeath(cause);
+		if (!this.world.isRemote) {
+		this.entityDropItem(new ItemStack(Items.BONE, rand.nextInt(8)), 0.0F);
+		}
+		
 	}
 }

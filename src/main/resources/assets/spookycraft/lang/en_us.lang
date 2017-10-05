@@ -7,6 +7,7 @@ tile.haunted_pumpkin.name=Haunted Pumpkin
 item.glass_string.name=Glass String
 item.candy.name=Candy
 item.chocolate_bar.name=Chocolate Bar
+item.candy_corn.name=Candy Corn
 
 #Fluids
 fluids.spookycraft.bone_milk=Bone Milk
@@ -15,6 +16,14 @@ fluids.spookycraft.bone_milk=Bone Milk
 itemGroup.spooky.name=SpookyCraft
 item.encyclopedia.name=Arcane Encyclopedia
 item.encyclopedia.name=Arcane Encyclopedia
+
+#Entities
+entity.ScareCrow.name=Scare Crow
+entity.SkeletalBat.name=Skeletal Bat
+entity.SkeletalChicken.name=Skeletal Chicken
+entity.SkeletalCow.name=Skeletal Cow
+entity.SkeletalParrot.name=Skeletal Parrot
+entity.SkeletalPig.name=Skeletal Pig
 
 #Encyclopedia
 button.back.name=Back

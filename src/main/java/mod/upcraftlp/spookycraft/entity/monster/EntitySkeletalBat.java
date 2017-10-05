@@ -31,6 +31,7 @@ public class EntitySkeletalBat extends EntitySkeletal {
 		super(worldIn);
 		this.setSize(0.5F, 0.9F);
 		this.setIsBatHanging(true);
+		
 	}
 
 	protected void entityInit() {
@@ -75,7 +76,7 @@ public class EntitySkeletalBat extends EntitySkeletal {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6);
+		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3);
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.0D);
 	}
 

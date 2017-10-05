@@ -2,15 +2,19 @@ package mod.upcraftlp.spookycraft.entity.monster;
 
 import javax.annotation.Nullable;
 
+import mod.upcraftlp.spookycraft.init.SpookyItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
@@ -18,6 +22,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -172,13 +177,19 @@ public class EntitySkeletalPig extends EntitySkeletal {
 	 */
 	public void onStruckByLightning(EntityLightningBolt lightningBolt) {
 		if (!this.world.isRemote && !this.isDead) {
-			EntitySkeleton entitySkeleton = new EntitySkeleton(this.world);
+			EntityWitherSkeleton entitySkeleton = new EntityWitherSkeleton(this.world);
 			entitySkeleton.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.GOLDEN_SWORD));
+			entitySkeleton.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(Blocks.PUMPKIN));
+			entitySkeleton.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, new ItemStack(SpookyItems.CANDY_BAG));
+			entitySkeleton.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 250, 255));
 			entitySkeleton.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
 			entitySkeleton.setNoAI(this.isAIDisabled());
 
 			if (this.hasCustomName()) {
 				entitySkeleton.setCustomNameTag(this.getCustomNameTag());
+				entitySkeleton.setAlwaysRenderNameTag(this.getAlwaysRenderNameTag());
+			}if (!this.hasCustomName()) {
+				entitySkeleton.setCustomNameTag("Skeli Warrior");
 				entitySkeleton.setAlwaysRenderNameTag(this.getAlwaysRenderNameTag());
 			}
 

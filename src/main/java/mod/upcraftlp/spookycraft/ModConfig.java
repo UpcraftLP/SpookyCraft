@@ -14,4 +14,6 @@ public class ModConfig {
     @Config.Comment("false to disable the update notification")
     public static boolean enableUpdateNotification = true;
 
+    
+    
 }

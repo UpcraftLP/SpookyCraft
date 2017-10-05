@@ -1,28 +1,15 @@
 package mod.upcraftlp.spookycraft.entity.different;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.world.World;
 
-public class EntityMirror extends Entity{
+public class EntityMirror extends EntityMob{
 
 	public EntityMirror(World worldIn) {
 		super(worldIn);
 		
 	}
 
-	@Override
-	protected void entityInit() {
-		
-	}
-
-	@Override
-	protected void readEntityFromNBT(NBTTagCompound compound) {
-		
-	}
-
-	@Override
-	protected void writeEntityToNBT(NBTTagCompound compound) {
-	}
+	
 
 }

@@ -1,8 +1,10 @@
 package mod.upcraftlp.spookycraft.client.models;
 
+import mod.upcraftlp.spookycraft.entity.monster.EntityScareCrow;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.math.MathHelper;
 
 /**
  * ScareCrow - Epiic
@@ -68,5 +70,43 @@ public class ModelScareCrow extends ModelBase {
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;
+	}
+
+	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entityIn) {
+		super.setRotationAngles(f, f1, f2, f3, f4, f5, entityIn);
+
+		EntityScareCrow crow = (EntityScareCrow) entityIn;
+
+		//f = crow.ticksExisted;
+		//f1 = 0.5f;
+		float globalSpeed = 1.0f;
+		float globalDegree = 1.0f;
+		float globalHeight = 1.0f;
+
+		flap(pumpkinHead, 0.8f * globalSpeed, 0.5f * globalDegree,true, 0.0f, 0.0f, f, f1);
+		walk(stick, 0.5f * globalSpeed, 1.0f * globalDegree,false, 0.0f, 0.0f, f, f1);
+		walk(shoulderPadLeft, 0.65f * globalSpeed, -1.0f * globalDegree,true, 0.0f, -31.0f, f, f1);
+		walk(shoulderPadRight, 0.65f * globalSpeed, 1.0f * globalDegree,false, 0.0f, -31.0f, f, f1);
+		bob(body, 0.9f * globalSpeed, 0.4f * globalDegree, 0.0f, 0.0f, f, f1);
+	}
+
+	public void swing(ModelRenderer box, float speed, float degree, float offset, float weight, float f, float f1) {
+		box.rotateAngleY = degree * f1 * MathHelper.cos(speed * f + offset) + weight * f1;
+	}
+
+	public void flap(ModelRenderer box, float speed, float degree, boolean invert, float offset, float weight, float f,
+			float f1) {
+
+		box.rotateAngleZ = degree * f1 * MathHelper.cos(speed * f + offset) + weight * f1;
+	}
+
+	public void bob(ModelRenderer box, float speed, float degree, float offset, float weight, float f, float f1) {
+		box.rotationPointY = degree * f1 * MathHelper.cos(speed * f + offset) + weight * f1;
+	}
+
+	public void walk(ModelRenderer box, float speed, float degree, boolean invert, float offset, float weight, float f,
+			float f1) {
+
+		box.rotateAngleX = degree * f1 * MathHelper.cos(speed * f + offset) + weight * f1;
 	}
 }

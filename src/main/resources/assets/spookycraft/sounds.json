@@ -1,0 +1,20 @@
+{
+    "scarecrow_hurt": {
+        "spookycraft": "passive",
+        "sounds": [
+            {"name": "spookycraft:scarecrow_hurt","stream": false}
+        ]
+    },
+    "scarecrow_ambient": {
+        "spookycraft": "passive",
+        "sounds": [
+            {"name": "spookycraft:scarecrow_ambient","stream": false}
+        ]
+    },
+    "scarecrow_death": {
+        "spookycraft": "passive",
+        "sounds": [
+            {"name": "spookycraft:scarecrow_death","stream": false}
+        ]
+    }
+}

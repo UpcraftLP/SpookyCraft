@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "spookycraft:items/candy"
+    "layer0": "spookycraft:items/candy_corn"
   }
 }
