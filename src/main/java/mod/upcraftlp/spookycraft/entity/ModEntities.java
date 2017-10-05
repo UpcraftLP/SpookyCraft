@@ -10,8 +10,12 @@ import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletal;
 import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalBat;
 import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalChicken;
 import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalCow;
+import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalOcelot;
 import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalParrot;
 import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalPig;
+import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalRabbit;
+import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalSheep;
+import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalWolf;
 import net.minecraft.entity.EntityLiving.SpawnPlacementType;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EnumCreatureType;
@@ -47,6 +51,18 @@ public class ModEntities {
 		// S Pig
 		EntityRegistry.registerModEntity(getEntityResource("SkeletalPig"), EntitySkeletalPig.class, "SkeletalPig", 6,
 				Main.INSTANCE, 80, 3, false, 956291, egg);
+		// S Wolf
+		EntityRegistry.registerModEntity(getEntityResource("SkeletalWolf"), EntitySkeletalWolf.class, "SkeletalWolf", 7,
+				Main.INSTANCE, 80, 3, false, 956291, egg);
+		// S Rabitt
+		EntityRegistry.registerModEntity(getEntityResource("SkeletalRabbit"), EntitySkeletalRabbit.class,
+				"SkeletalRabbit", 8, Main.INSTANCE, 80, 3, false, 956291, egg);
+		// S Sheep
+		EntityRegistry.registerModEntity(getEntityResource("SkeletalSheep"), EntitySkeletalSheep.class, "SkeletalSheep",
+				9, Main.INSTANCE, 80, 3, false, 956291, egg);
+		// S Ocelot
+		EntityRegistry.registerModEntity(getEntityResource("SkeletalOcelot"), EntitySkeletalOcelot.class,
+				"SkeletalOcelot", 10, Main.INSTANCE, 80, 3, false, 956291, egg);
 
 		/*
 		 * We want our mob to spawn in Plains and ice plains biomes. If you
@@ -63,11 +79,20 @@ public class ModEntities {
 		// S Cow
 		EntityRegistry.addSpawn(EntitySkeletalCow.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
 		// S Parrot
-		EntityRegistry.addSpawn(EntitySkeletalParrot.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.JUNGLE,Biomes.JUNGLE_EDGE,Biomes.JUNGLE_HILLS,Biomes.MUTATED_JUNGLE,Biomes.MUTATED_JUNGLE_EDGE);
+		EntityRegistry.addSpawn(EntitySkeletalParrot.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.JUNGLE,
+				Biomes.JUNGLE_EDGE, Biomes.JUNGLE_HILLS, Biomes.MUTATED_JUNGLE, Biomes.MUTATED_JUNGLE_EDGE);
 		// S Pig
 		EntityRegistry.addSpawn(EntitySkeletalPig.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
-		
-		
+		// S Wolf
+		EntityRegistry.addSpawn(EntitySkeletalWolf.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+		// S Rabbit
+		EntityRegistry.addSpawn(EntitySkeletalRabbit.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+		// S Ocelot
+		EntityRegistry.addSpawn(EntitySkeletalOcelot.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.JUNGLE,
+				Biomes.JUNGLE_EDGE, Biomes.JUNGLE_HILLS, Biomes.MUTATED_JUNGLE, Biomes.MUTATED_JUNGLE_EDGE);
+		// S Sheep
+		EntityRegistry.addSpawn(EntitySkeletalSheep.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+
 		/*
 		 * Mob Placement
 		 */
@@ -86,13 +111,21 @@ public class ModEntities {
 		EntitySpawnPlacementRegistry.setPlacementType(EntitySkeletalParrot.class, SpawnPlacementType.IN_AIR);
 		// S Pig
 		EntitySpawnPlacementRegistry.setPlacementType(EntitySkeletalPig.class, SpawnPlacementType.ON_GROUND);
+		// S Wolf
+		EntitySpawnPlacementRegistry.setPlacementType(EntitySkeletalWolf.class, SpawnPlacementType.ON_GROUND);
+		// S Ocelot
+		EntitySpawnPlacementRegistry.setPlacementType(EntitySkeletalOcelot.class, SpawnPlacementType.ON_GROUND);
+		// S Sheep
+		EntitySpawnPlacementRegistry.setPlacementType(EntitySkeletalSheep.class, SpawnPlacementType.ON_GROUND);
+		// S Rabbit
+		EntitySpawnPlacementRegistry.setPlacementType(EntitySkeletalRabbit.class, SpawnPlacementType.ON_GROUND);
 
 		/*
 		 * This is the loot table for our mob
 		 */
 
 		// Scare Crow
-		 LootTableList.register(EntityScareCrow.LOOT_CROW);
+		LootTableList.register(EntityScareCrow.LOOT_CROW);
 		// Skeletals
 		LootTableList.register(EntitySkeletal.LOOT_SKELETAL);
 

@@ -5,7 +5,7 @@ tile.haunted_pumpkin.name=Haunted Pumpkin
 
 #Items
 item.glass_string.name=Glass String
-item.candy.name=Candy
+item.candy_bag.name=Candy Bag
 item.chocolate_bar.name=Chocolate Bar
 item.candy_corn.name=Candy Corn
 
@@ -24,6 +24,10 @@ entity.SkeletalChicken.name=Skeletal Chicken
 entity.SkeletalCow.name=Skeletal Cow
 entity.SkeletalParrot.name=Skeletal Parrot
 entity.SkeletalPig.name=Skeletal Pig
+entity.SkeletalWolf.name=Skeletal Wolf
+entity.SkeletalOcelot.name=Skeletal Ocelot
+entity.SkeletalRabbit.name=Skeletal Rabbit
+entity.SkeletalSheep.name=Skeletal Sheep
 
 #Encyclopedia
 button.back.name=Back
