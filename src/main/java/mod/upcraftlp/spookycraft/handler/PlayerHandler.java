@@ -42,18 +42,8 @@ public class PlayerHandler {
 	public static void onBreakSpookyBlock(BlockEvent.BreakEvent event) {
 		World world = event.getWorld();
 		BlockPos pos = event.getPos();
-		IBlockState state = world.getBlockState(pos);
-		Block block = state.getBlock();
-		EntityPlayer player = event.getPlayer();
-		ItemStack stack = player.getActiveItemStack();
-		ScaryNightHandler handler = new ScaryNightHandler();
-		if (event.getWorld().getBlockState(pos).getBlock() instanceof BlockStone ) {
-
-			if (!world.isRemote && handler.isNightTime(world)) {
-				System.out.println("fired");
-				world.playSound(player, player.posX, player.posY, player.posZ, SoundHandler.scarecrow_ambient.sound(), SoundCategory.AMBIENT,30, 10);
-				player.playSound(SoundHandler.scarecrow_ambient.sound(), 30, 10);
-			}
+		if (!world.isRemote && world.getBlockState(pos).getBlock() instanceof BlockStone && ScaryNightHandler.isNightTime(world)) {
+			if(world.rand.nextDouble() < 0.1D) world.playSound(null, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, SoundHandler.scarecrow_ambient.sound(), SoundCategory.AMBIENT,30, 10);
 		}
 	}
 }
