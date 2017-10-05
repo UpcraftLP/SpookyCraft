@@ -113,7 +113,7 @@ public class EntitySkeletalParrot extends EntitySkeletal {
 		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(6, new EntityAILookIdle(this));
 
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
+		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		this.targetTasks.addTask(2, new EntitySkeletal.AIskeletalTarget(this, EntityPlayer.class));
 		this.targetTasks.addTask(3, new EntitySkeletal.AIskeletalTarget(this, EntityIronGolem.class));
 	}
@@ -193,7 +193,7 @@ public class EntitySkeletalParrot extends EntitySkeletal {
 
 	private static boolean playMimicSound(World worldIn, Entity p_192006_1_) {
 		if (!p_192006_1_.isSilent() && worldIn.rand.nextInt(50) == 0) {
-			List<EntityLiving> list = worldIn.<EntityLiving>getEntitiesWithinAABB(EntityLiving.class,
+			List<EntityLiving> list = worldIn.getEntitiesWithinAABB(EntityLiving.class,
 					p_192006_1_.getEntityBoundingBox().grow(20.0D), CAN_MIMIC);
 
 			if (!list.isEmpty()) {
@@ -201,7 +201,7 @@ public class EntitySkeletalParrot extends EntitySkeletal {
 
 				if (!entityliving.isSilent()) {
 					SoundEvent soundevent = MIMIC_SOUNDS.get(entityliving.getClass());
-					worldIn.playSound((EntityPlayer) null, p_192006_1_.posX, p_192006_1_.posY, p_192006_1_.posZ,
+					worldIn.playSound(null, p_192006_1_.posX, p_192006_1_.posY, p_192006_1_.posZ,
 							soundevent, p_192006_1_.getSoundCategory(), 0.7F, getPitch(worldIn.rand));
 					return true;
 				}
@@ -274,7 +274,7 @@ public class EntitySkeletalParrot extends EntitySkeletal {
 
 	public static void playAmbientSound(World worldIn, Entity p_192005_1_) {
 		if (!p_192005_1_.isSilent() && !playMimicSound(worldIn, p_192005_1_) && worldIn.rand.nextInt(200) == 0) {
-			worldIn.playSound((EntityPlayer) null, p_192005_1_.posX, p_192005_1_.posY, p_192005_1_.posZ,
+			worldIn.playSound(null, p_192005_1_.posX, p_192005_1_.posY, p_192005_1_.posZ,
 					getAmbientSound(worldIn.rand), p_192005_1_.getSoundCategory(), 1.0F, getPitch(worldIn.rand));
 		}
 	}

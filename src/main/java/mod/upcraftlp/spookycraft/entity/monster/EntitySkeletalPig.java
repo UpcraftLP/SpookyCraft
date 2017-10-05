@@ -30,9 +30,9 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class EntitySkeletalPig extends EntitySkeletal {
-	private static final DataParameter<Boolean> SADDLED = EntityDataManager.<Boolean>createKey(EntityPig.class,
+	private static final DataParameter<Boolean> SADDLED = EntityDataManager.createKey(EntityPig.class,
 			DataSerializers.BOOLEAN);
-	private static final DataParameter<Integer> BOOST_TIME = EntityDataManager.<Integer>createKey(EntityPig.class,
+	private static final DataParameter<Integer> BOOST_TIME = EntityDataManager.createKey(EntityPig.class,
 			DataSerializers.VARINT);
 	private boolean boosting;
 	private int boostTime;
@@ -56,7 +56,7 @@ public class EntitySkeletalPig extends EntitySkeletal {
 
 	@Nullable
 	public Entity getControllingPassenger() {
-		return this.getPassengers().isEmpty() ? null : (Entity) this.getPassengers().get(0);
+		return this.getPassengers().isEmpty() ? null : this.getPassengers().get(0);
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class EntitySkeletalPig extends EntitySkeletal {
 		if (BOOST_TIME.equals(key) && this.world.isRemote) {
 			this.boosting = true;
 			this.boostTime = 0;
-			this.totalBoostTime = ((Integer) this.dataManager.get(BOOST_TIME)).intValue();
+			this.totalBoostTime = this.dataManager.get(BOOST_TIME).intValue();
 		}
 
 		super.notifyDataManagerChange(key);
@@ -158,7 +158,7 @@ public class EntitySkeletalPig extends EntitySkeletal {
 	 * Returns true if the pig is saddled.
 	 */
 	public boolean getSaddled() {
-		return ((Boolean) this.dataManager.get(SADDLED)).booleanValue();
+		return this.dataManager.get(SADDLED).booleanValue();
 	}
 
 	/**

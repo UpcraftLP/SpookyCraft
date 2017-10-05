@@ -22,7 +22,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class EntitySkeletalBat extends EntitySkeletal {
-	private static final DataParameter<Byte> HANGING = EntityDataManager.<Byte>createKey(EntitySkeletalBat.class,
+	private static final DataParameter<Byte> HANGING = EntityDataManager.createKey(EntitySkeletalBat.class,
 			DataSerializers.BYTE);
 	/** Coordinates of where the bat spawned. */
 	private BlockPos spawnPosition;
@@ -81,11 +81,11 @@ public class EntitySkeletalBat extends EntitySkeletal {
 	}
 
 	public boolean getIsBatHanging() {
-		return (((Byte) this.dataManager.get(HANGING)).byteValue() & 1) != 0;
+		return (this.dataManager.get(HANGING).byteValue() & 1) != 0;
 	}
 
 	public void setIsBatHanging(boolean isHanging) {
-		byte b0 = ((Byte) this.dataManager.get(HANGING)).byteValue();
+		byte b0 = this.dataManager.get(HANGING).byteValue();
 
 		if (isHanging) {
 			this.dataManager.set(HANGING, Byte.valueOf((byte) (b0 | 1)));
@@ -123,11 +123,11 @@ public class EntitySkeletalBat extends EntitySkeletal {
 
 				if (this.world.getNearestPlayerNotCreative(this, 4.0D) != null) {
 					this.setIsBatHanging(false);
-					this.world.playEvent((EntityPlayer) null, 1025, blockpos, 0);
+					this.world.playEvent(null, 1025, blockpos, 0);
 				}
 			} else {
 				this.setIsBatHanging(false);
-				this.world.playEvent((EntityPlayer) null, 1025, blockpos, 0);
+				this.world.playEvent(null, 1025, blockpos, 0);
 			}
 		} else {
 			if (this.spawnPosition != null
@@ -210,7 +210,7 @@ public class EntitySkeletalBat extends EntitySkeletal {
 	 */
 	public void writeEntityToNBT(NBTTagCompound compound) {
 		super.writeEntityToNBT(compound);
-		compound.setByte("BatFlags", ((Byte) this.dataManager.get(HANGING)).byteValue());
+		compound.setByte("BatFlags", this.dataManager.get(HANGING).byteValue());
 	}
 
 	/**
@@ -232,7 +232,7 @@ public class EntitySkeletalBat extends EntitySkeletal {
 				return false;
 			}
 
-			return i > this.rand.nextInt(j) ? false : super.getCanSpawnHere();
+			return i <= this.rand.nextInt(j) && super.getCanSpawnHere();
 		}
 	}
 

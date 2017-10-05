@@ -43,7 +43,7 @@ public class EntitySkeletal extends EntityMob {
 		this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 0.8D));
 		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(6, new EntityAILookIdle(this));
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
+		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		this.targetTasks.addTask(2, new EntitySkeletal.AIskeletalTarget(this, EntityPlayer.class));
 		this.targetTasks.addTask(3, new EntitySkeletal.AIskeletalTarget(this, EntityIronGolem.class));
 	}
@@ -58,7 +58,7 @@ public class EntitySkeletal extends EntityMob {
 		 */
 		public boolean shouldExecute() {
 			float f = this.taskOwner.getBrightness();
-			return f >= 0.5F ? false : super.shouldExecute();
+			return !(f >= 0.5F) && super.shouldExecute();
 		}
 	}
 

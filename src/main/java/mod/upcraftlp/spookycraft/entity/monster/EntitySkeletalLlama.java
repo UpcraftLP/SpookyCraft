@@ -1,58 +1,31 @@
 package mod.upcraftlp.spookycraft.entity.monster;
 
-import javax.annotation.Nullable;
-
 import com.google.common.base.Predicate;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.IRangedAttackMob;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackRanged;
-import net.minecraft.entity.ai.EntityAIFollowParent;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILlamaFollowCaravan;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMate;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAIRunAroundLikeCrazy;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityLlamaSpit;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.EnumDyeColor;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
-import net.minecraft.world.storage.loot.LootTableList;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
 
 public class EntitySkeletalLlama extends EntitySkeletal implements IRangedAttackMob{
-	private static final DataParameter<Integer> DATA_STRENGTH_ID = EntityDataManager.<Integer>createKey(EntitySkeletalLlama.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> DATA_STRENGTH_ID = EntityDataManager.createKey(EntitySkeletalLlama.class, DataSerializers.VARINT);
     private boolean didSpit;
     @Nullable
     private EntitySkeletalLlama caravanHead;
@@ -78,7 +51,7 @@ public class EntitySkeletalLlama extends EntitySkeletal implements IRangedAttack
 
     public int getStrength()
     {
-        return ((Integer)this.dataManager.get(DATA_STRENGTH_ID)).intValue();
+        return this.dataManager.get(DATA_STRENGTH_ID).intValue();
     }
 
     /**
@@ -225,7 +198,7 @@ public class EntitySkeletalLlama extends EntitySkeletal implements IRangedAttack
         double d2 = target.posZ - this.posZ;
         float f = MathHelper.sqrt(d0 * d0 + d2 * d2) * 0.2F;
         entityllamaspit.shoot(d0, d1 + (double)f, d2, 1.5F, 10.0F);
-        this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_LLAMA_SPIT, this.getSoundCategory(), 1.0F, 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F);
+        this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_LLAMA_SPIT, this.getSoundCategory(), 1.0F, 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F);
         this.world.spawnEntity(entityllamaspit);
         this.didSpit = true;
     }
@@ -260,7 +233,7 @@ public class EntitySkeletalLlama extends EntitySkeletal implements IRangedAttack
             if (iblockstate.getMaterial() != Material.AIR && !this.isSilent())
             {
                 SoundType soundtype = block.getSoundType();
-                this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, soundtype.getStepSound(), this.getSoundCategory(), soundtype.getVolume() * 0.5F, soundtype.getPitch() * 0.75F);
+                this.world.playSound(null, this.posX, this.posY, this.posZ, soundtype.getStepSound(), this.getSoundCategory(), soundtype.getVolume() * 0.5F, soundtype.getPitch() * 0.75F);
             }
         }
     }
@@ -309,7 +282,7 @@ public class EntitySkeletalLlama extends EntitySkeletal implements IRangedAttack
         {
             public AIDefendTarget(EntitySkeletalLlama llama)
             {
-                super(llama, EntityWolf.class, 16, false, true, (Predicate)null);
+                super(llama, EntityWolf.class, 16, false, true, null);
             }
 
             /**
@@ -317,13 +290,13 @@ public class EntitySkeletalLlama extends EntitySkeletal implements IRangedAttack
              */
             public boolean shouldExecute()
             {
-                if (super.shouldExecute() && this.targetEntity != null && !((EntityWolf)this.targetEntity).isTamed())
+                if (super.shouldExecute() && this.targetEntity != null && !this.targetEntity.isTamed())
                 {
                     return true;
                 }
                 else
                 {
-                    this.taskOwner.setAttackTarget((EntityLivingBase)null);
+                    this.taskOwner.setAttackTarget(null);
                     return false;
                 }
             }

@@ -38,7 +38,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class EntitySkeletalWolf extends EntitySkeletal {
 
 	private static final DataParameter<Float> DATA_HEALTH_ID = EntityDataManager
-			.<Float>createKey(EntitySkeletalWolf.class, DataSerializers.FLOAT);
+			.createKey(EntitySkeletalWolf.class, DataSerializers.FLOAT);
 	private float headRotationCourse;
 	private float headRotationCourseOld;
 	/** true is the wolf is wet else false */
@@ -63,7 +63,7 @@ public class EntitySkeletalWolf extends EntitySkeletal {
 		this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 0.8D));
 		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(6, new EntityAILookIdle(this));
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
+		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		this.targetTasks.addTask(2, new EntitySkeletal.AIskeletalTarget(this, EntityPlayer.class));
 		this.targetTasks.addTask(3, new EntitySkeletal.AIskeletalTarget(this, EntityIronGolem.class));
 
@@ -370,7 +370,7 @@ public class EntitySkeletalWolf extends EntitySkeletal {
 		 * Execute a one shot task or start executing a continuous task
 		 */
 		public void startExecuting() {
-			EntitySkeletalWolf.this.setAttackTarget((EntityLivingBase) null);
+			EntitySkeletalWolf.this.setAttackTarget(null);
 			super.startExecuting();
 		}
 
@@ -378,7 +378,7 @@ public class EntitySkeletalWolf extends EntitySkeletal {
 		 * Keep ticking a continuous task that has already been started
 		 */
 		public void updateTask() {
-			EntitySkeletalWolf.this.setAttackTarget((EntityLivingBase) null);
+			EntitySkeletalWolf.this.setAttackTarget(null);
 			super.updateTask();
 		}
 	}

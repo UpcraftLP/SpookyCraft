@@ -2,6 +2,7 @@ package mod.upcraftlp.spookycraft.handler;
 
 import mod.upcraftlp.spookycraft.block.BlockHauntedPumpkin;
 import mod.upcraftlp.spookycraft.init.SpookyBlocks;
+import mod.upcraftlp.spookycraft.init.SpookySounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPumpkin;
 import net.minecraft.block.BlockStone;
@@ -44,7 +45,7 @@ public class PlayerHandler {
 		World world = event.getWorld();
 		BlockPos pos = event.getPos();
 		if (!world.isRemote && world.getBlockState(pos).getMaterial() == Material.ROCK && ScaryNightHandler.isNightTime(world)) {
-			if(world.rand.nextDouble() < 0.1D) world.playSound(null, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, SoundHandler.scarecrow_ambient.sound(), SoundCategory.AMBIENT,30, 10);
+			if(world.rand.nextDouble() < 0.1D) world.playSound(null, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, SpookySounds.SCARECROW_AMBIENT, SoundCategory.AMBIENT,30, 10);
 		}
 	}
 }
