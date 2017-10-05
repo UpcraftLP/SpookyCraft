@@ -5,6 +5,7 @@ import mod.upcraftlp.spookycraft.init.SpookyBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPumpkin;
 import net.minecraft.block.BlockStone;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -42,7 +43,7 @@ public class PlayerHandler {
 	public static void onBreakSpookyBlock(BlockEvent.BreakEvent event) {
 		World world = event.getWorld();
 		BlockPos pos = event.getPos();
-		if (!world.isRemote && world.getBlockState(pos).getBlock() instanceof BlockStone && ScaryNightHandler.isNightTime(world)) {
+		if (!world.isRemote && world.getBlockState(pos).getMaterial() == Material.ROCK && ScaryNightHandler.isNightTime(world)) {
 			if(world.rand.nextDouble() < 0.1D) world.playSound(null, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, SoundHandler.scarecrow_ambient.sound(), SoundCategory.AMBIENT,30, 10);
 		}
 	}
