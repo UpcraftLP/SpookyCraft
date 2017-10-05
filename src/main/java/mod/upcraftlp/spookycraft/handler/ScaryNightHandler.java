@@ -1,9 +1,6 @@
 package mod.upcraftlp.spookycraft.handler;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
-
 import core.upcraftlp.craftdev.api.util.Utils;
 import mod.upcraftlp.spookycraft.Reference;
 import mod.upcraftlp.spookycraft.entity.monster.EntityScareCrow;
@@ -20,16 +17,19 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
+import java.util.List;
+
 /**
  * @author UpcraftLP
  */
 @Mod.EventBusSubscriber(modid = Reference.MODID)
 public class ScaryNightHandler {
 
-    public static final List<Class<? extends EntityLiving>> SPAWN_LIST = Lists.newArrayList(
+    private static final List<Class<? extends EntityLiving>> SPAWN_LIST = Lists.newArrayList(
             EntitySkeleton.class,
             EntityZombie.class,
-            EntityEnderman.class
+            EntityEnderman.class,
+            EntityScareCrow.class
             //TODO different vanilla mobs?
             //TODO custom mobs
     );
