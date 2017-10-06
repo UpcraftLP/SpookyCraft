@@ -7,7 +7,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import org.apache.commons.codec.language.Soundex;
 
 import java.lang.reflect.Field;
 import java.util.Locale;
@@ -23,8 +22,8 @@ public class SpookySounds {
     public static final SoundEvent SCARECROW_AMBIENT = null;
     public static final SoundEvent SCARECROW_DEATH = null;
 
-    @Mod.EventBusSubscriber
-    private static class Registry {
+	@Mod.EventBusSubscriber
+	private static class Registry {
 
         @SubscribeEvent
         public static void onRegisterSounds(RegistryEvent.Register<SoundEvent> event) {
@@ -33,8 +32,10 @@ public class SpookySounds {
             }
         }
 
-        private static SoundEvent register(String soundName) {
-            return ModHelper.registerSound(soundName, Reference.MODID);
-        }
-    }
+
+		private static SoundEvent register(String soundName) {
+			return ModHelper.registerSound(soundName, Reference.MODID);
+		}
+
+	}
 }
