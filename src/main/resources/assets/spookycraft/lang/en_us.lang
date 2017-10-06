@@ -10,7 +10,7 @@ item.chocolate_bar.name=Chocolate Bar
 item.candy_corn.name=Candy Corn
 
 #Fluids
-fluids.spookycraft.bone_milk=Bone Milk
+fluid.spookycraft.bone_milk=Bone Milk
 
 #Misc
 itemGroup.spooky.name=SpookyCraft
