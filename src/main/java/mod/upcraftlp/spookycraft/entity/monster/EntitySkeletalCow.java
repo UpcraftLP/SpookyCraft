@@ -1,5 +1,6 @@
 package mod.upcraftlp.spookycraft.entity.monster;
 
+import mod.upcraftlp.spookycraft.init.SpookyFluids;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -7,6 +8,8 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 
 public class EntitySkeletalCow extends EntitySkeletal {
 
@@ -28,17 +31,16 @@ public class EntitySkeletalCow extends EntitySkeletal {
 
 	public boolean processInteract(EntityPlayer player, EnumHand hand) {
 		ItemStack itemstack = player.getHeldItem(hand);
-// TODO Make a new bucket type "Bio Milk" 
 		if (itemstack.getItem() == Items.BUCKET && !player.capabilities.isCreativeMode && !this.isChild()) {
 			player.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
 			itemstack.shrink(1);
 
+			ItemStack milkBucket = FluidUtil.getFilledBucket(new FluidStack(SpookyFluids.BONE_MILK, 1000));
 			if (itemstack.isEmpty()) {
-				player.setHeldItem(hand, new ItemStack(Items.MILK_BUCKET));
-			} else if (!player.inventory.addItemStackToInventory(new ItemStack(Items.MILK_BUCKET))) {
-				player.dropItem(new ItemStack(Items.MILK_BUCKET), false);
+				player.setHeldItem(hand, milkBucket);
+			} else if (!player.inventory.addItemStackToInventory(milkBucket)) {
+				player.dropItem(milkBucket, false);
 			}
-
 			return true;
 		} else {
 			return super.processInteract(player, hand);

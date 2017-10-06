@@ -7,8 +7,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityIronGolem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
@@ -42,15 +40,7 @@ public class EntitySkeletalRabbit extends EntitySkeletal {
 
 	@Override
 	protected void initEntityAI() {
-		this.tasks.addTask(1, new EntityAISwimming(this));
-		this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-		this.tasks.addTask(4, new EntityAIAttackMelee(this, 3.0, false));
-		this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 0.6D));
-		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		this.tasks.addTask(6, new EntityAILookIdle(this));
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(2, new EntitySkeletal.AIskeletalTarget(this, EntityPlayer.class));
-		this.targetTasks.addTask(3, new EntitySkeletal.AIskeletalTarget(this, EntityIronGolem.class));
+		super.initEntityAI();
 		this.tasks.addTask(4, new EntitySkeletalRabbit.AIEvilAttack(this));
 		this.tasks.addTask(1, new EntitySkeletalRabbit.AIPanic(this, 2.2D));
 		this.tasks.addTask(5, new EntitySkeletalRabbit.AIRaidFarm(this));
@@ -281,7 +271,7 @@ public class EntitySkeletalRabbit extends EntitySkeletal {
 
 	/**
 	 * Returns true if
-	 * {@link net.minecraft.entity.passive.EntitySkeletalRabbit#carrotTicks
+	 * {@link EntitySkeletalRabbit#carrotTicks
 	 * carrotTicks} has reached zero
 	 */
 	private boolean isCarrotEaten() {
@@ -390,14 +380,14 @@ public class EntitySkeletalRabbit extends EntitySkeletal {
 				Block block = iblockstate.getBlock();
 
 				if (this.canRaid && block instanceof BlockCarrot) {
-					Integer integer = iblockstate.getValue(BlockCarrot.AGE);
+					int integer = iblockstate.getValue(BlockCarrot.AGE);
 
-					if (integer.intValue() == 0) {
+					if (integer == 0) {
 						world.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 2);
 						world.destroyBlock(blockpos, true);
 					} else {
 						world.setBlockState(blockpos,
-								iblockstate.withProperty(BlockCarrot.AGE, Integer.valueOf(integer.intValue() - 1)), 2);
+								iblockstate.withProperty(BlockCarrot.AGE, integer - 1), 2);
 						world.playEvent(2001, blockpos, Block.getStateId(iblockstate));
 					}
 

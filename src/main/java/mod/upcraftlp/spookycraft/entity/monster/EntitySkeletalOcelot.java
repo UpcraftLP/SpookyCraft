@@ -5,9 +5,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityIronGolem;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.ai.EntityAIOcelotAttack;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -26,17 +24,7 @@ public class EntitySkeletalOcelot extends EntitySkeletal {
 
 	@Override
 	protected void initEntityAI() {
-		this.tasks.addTask(1, new EntityAISwimming(this));
-		this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-		this.tasks.addTask(4, new EntityAIAttackMelee(this, 3.0, false));
-		this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 0.8D));
-		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		this.tasks.addTask(6, new EntityAILookIdle(this));
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(2, new EntitySkeletal.AIskeletalTarget(this, EntityPlayer.class));
-		this.targetTasks.addTask(3, new EntitySkeletal.AIskeletalTarget(this, EntityIronGolem.class));
-
-		this.tasks.addTask(7, new EntityAILeapAtTarget(this, 0.3F));
+		super.initEntityAI();
 		this.tasks.addTask(8, new EntityAIOcelotAttack(this));
 	}
 
@@ -103,11 +91,7 @@ public class EntitySkeletalOcelot extends EntitySkeletal {
 	 * Called when the entity is attacked.
 	 */
 	public boolean attackEntityFrom(DamageSource source, float amount) {
-		if (this.isEntityInvulnerable(source)) {
-			return false;
-		}
-
-		return super.attackEntityFrom(source, amount);
+		return this.isEntityInvulnerable(source) || super.attackEntityFrom(source, amount);
 	}
 
 	/**

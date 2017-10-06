@@ -1,14 +1,8 @@
 package mod.upcraftlp.spookycraft.entity.monster;
 
-import java.util.Calendar;
-
-import javax.annotation.Nullable;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -16,10 +10,12 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.Calendar;
 
 public class EntitySkeletalBat extends EntitySkeletal {
 	private static final DataParameter<Byte> HANGING = EntityDataManager.createKey(EntitySkeletalBat.class,
@@ -36,7 +32,7 @@ public class EntitySkeletalBat extends EntitySkeletal {
 
 	protected void entityInit() {
 		super.entityInit();
-		this.dataManager.register(HANGING, Byte.valueOf((byte) 0));
+		this.dataManager.register(HANGING, (byte) 0);
 	}
 
 	/**
@@ -81,16 +77,16 @@ public class EntitySkeletalBat extends EntitySkeletal {
 	}
 
 	public boolean getIsBatHanging() {
-		return (this.dataManager.get(HANGING).byteValue() & 1) != 0;
+		return (this.dataManager.get(HANGING) & 1) != 0;
 	}
 
 	public void setIsBatHanging(boolean isHanging) {
-		byte b0 = this.dataManager.get(HANGING).byteValue();
+		byte b0 = this.dataManager.get(HANGING);
 
 		if (isHanging) {
-			this.dataManager.set(HANGING, Byte.valueOf((byte) (b0 | 1)));
+			this.dataManager.set(HANGING, (byte) (b0 | 1));
 		} else {
-			this.dataManager.set(HANGING, Byte.valueOf((byte) (b0 & -2)));
+			this.dataManager.set(HANGING, (byte) (b0 & -2));
 		}
 	}
 
@@ -202,7 +198,7 @@ public class EntitySkeletalBat extends EntitySkeletal {
 	 */
 	public void readEntityFromNBT(NBTTagCompound compound) {
 		super.readEntityFromNBT(compound);
-		this.dataManager.set(HANGING, Byte.valueOf(compound.getByte("BatFlags")));
+		this.dataManager.set(HANGING, compound.getByte("BatFlags"));
 	}
 
 	/**
@@ -210,7 +206,7 @@ public class EntitySkeletalBat extends EntitySkeletal {
 	 */
 	public void writeEntityToNBT(NBTTagCompound compound) {
 		super.writeEntityToNBT(compound);
-		compound.setByte("BatFlags", this.dataManager.get(HANGING).byteValue());
+		compound.setByte("BatFlags", this.dataManager.get(HANGING));
 	}
 
 	/**

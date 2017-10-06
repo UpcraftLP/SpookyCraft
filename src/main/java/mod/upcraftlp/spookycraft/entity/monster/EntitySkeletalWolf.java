@@ -1,21 +1,12 @@
 package mod.upcraftlp.spookycraft.entity.monster;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityGhast;
-import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.entity.passive.EntityLlama;
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,6 +25,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
 
 public class EntitySkeletalWolf extends EntitySkeletal {
 
@@ -57,29 +50,16 @@ public class EntitySkeletalWolf extends EntitySkeletal {
 	}
 
 	protected void initEntityAI() {
-		this.tasks.addTask(1, new EntityAISwimming(this));
-		this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-		this.tasks.addTask(4, new EntityAIAttackMelee(this, 3.0, false));
-		this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 0.8D));
-		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		this.tasks.addTask(6, new EntityAILookIdle(this));
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(2, new EntitySkeletal.AIskeletalTarget(this, EntityPlayer.class));
-		this.targetTasks.addTask(3, new EntitySkeletal.AIskeletalTarget(this, EntityIronGolem.class));
-
-		this.tasks.addTask(3, new EntitySkeletalWolf.AIAvoidEntity(this, EntityLlama.class, 24.0F, 1.5D, 1.5D));
+		super.initEntityAI();
+		this.tasks.addTask(3, new EntitySkeletalWolf.AIAvoidEntity<>(this, EntityLlama.class, 24.0F, 1.5D, 1.5D));
 		this.tasks.addTask(4, new EntityAILeapAtTarget(this, 0.4F));
-
 	}
 
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.30000001192092896D);
-
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
-
 		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
-
 	}
 
 	/**
@@ -96,12 +76,12 @@ public class EntitySkeletalWolf extends EntitySkeletal {
 	}
 
 	protected void updateAITasks() {
-		this.dataManager.set(DATA_HEALTH_ID, Float.valueOf(this.getHealth()));
+		this.dataManager.set(DATA_HEALTH_ID, this.getHealth());
 	}
 
 	protected void entityInit() {
 		super.entityInit();
-		this.dataManager.register(DATA_HEALTH_ID, Float.valueOf(this.getHealth()));
+		this.dataManager.register(DATA_HEALTH_ID, this.getHealth());
 	}
 
 	/**
@@ -288,7 +268,7 @@ public class EntitySkeletalWolf extends EntitySkeletal {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public float getTailRotation() {
+	public float getTailRotation() { //TODO ??
 		if (this.isAngry()) {
 			return 1.5393804F;
 		}
@@ -311,13 +291,6 @@ public class EntitySkeletalWolf extends EntitySkeletal {
 	}
 
 	/**
-	 * Determines whether this wolf is angry or not.
-	 */
-	public boolean isAngry() {
-		return true;
-	}
-
-	/**
 	 * Sets whether this wolf is angry or not.
 	 */
 	public void setAngry(boolean angry) {
@@ -328,7 +301,6 @@ public class EntitySkeletalWolf extends EntitySkeletal {
 		if (!(target instanceof EntityCreeper) && !(target instanceof EntityGhast)) {
 			if (target instanceof EntitySkeletalWolf) {
 				EntitySkeletalWolf entitywolf = (EntitySkeletalWolf) target;
-
 			}
 
 			if (target instanceof EntityPlayer && owner instanceof EntityPlayer
@@ -343,23 +315,17 @@ public class EntitySkeletalWolf extends EntitySkeletal {
 	}
 
 	class AIAvoidEntity<T extends Entity> extends EntityAIAvoidEntity<T> {
-		private final EntitySkeletalWolf wolf;
 
 		public AIAvoidEntity(EntitySkeletalWolf wolfIn, Class<T> p_i47251_3_, float p_i47251_4_, double p_i47251_5_,
 				double p_i47251_7_) {
 			super(wolfIn, p_i47251_3_, p_i47251_4_, p_i47251_5_, p_i47251_7_);
-			this.wolf = wolfIn;
 		}
 
 		/**
 		 * Returns whether the EntityAIBase should begin execution.
 		 */
 		public boolean shouldExecute() {
-			if (super.shouldExecute() && this.closestLivingEntity instanceof EntityLlama) {
-				return this.avoidLlama((EntityLlama) this.closestLivingEntity);
-			} else {
-				return false;
-			}
+			return super.shouldExecute() && this.closestLivingEntity instanceof EntityLlama && this.avoidLlama((EntityLlama) this.closestLivingEntity);
 		}
 
 		private boolean avoidLlama(EntityLlama p_190854_1_) {

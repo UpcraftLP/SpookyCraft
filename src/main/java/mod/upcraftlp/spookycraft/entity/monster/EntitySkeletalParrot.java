@@ -1,14 +1,6 @@
 package mod.upcraftlp.spookycraft.entity.monster;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
-import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLog;
@@ -17,43 +9,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWaterFlying;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.ai.EntityFlyHelper;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityWither;
-import net.minecraft.entity.monster.EntityBlaze;
-import net.minecraft.entity.monster.EntityCaveSpider;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.EntityElderGuardian;
-import net.minecraft.entity.monster.EntityEnderman;
-import net.minecraft.entity.monster.EntityEndermite;
-import net.minecraft.entity.monster.EntityEvoker;
-import net.minecraft.entity.monster.EntityGhast;
-import net.minecraft.entity.monster.EntityHusk;
-import net.minecraft.entity.monster.EntityIllusionIllager;
-import net.minecraft.entity.monster.EntityIronGolem;
-import net.minecraft.entity.monster.EntityMagmaCube;
-import net.minecraft.entity.monster.EntityPigZombie;
-import net.minecraft.entity.monster.EntityPolarBear;
-import net.minecraft.entity.monster.EntityShulker;
-import net.minecraft.entity.monster.EntitySilverfish;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntitySlime;
-import net.minecraft.entity.monster.EntitySpider;
-import net.minecraft.entity.monster.EntityStray;
-import net.minecraft.entity.monster.EntityVex;
-import net.minecraft.entity.monster.EntityVindicator;
-import net.minecraft.entity.monster.EntityWitch;
-import net.minecraft.entity.monster.EntityWitherSkeleton;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.monster.EntityZombieVillager;
+import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
@@ -67,11 +26,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateFlying;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -79,15 +34,18 @@ import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.function.Predicate;
+
 public class EntitySkeletalParrot extends EntitySkeletal {
-	private static final Predicate<EntityLiving> CAN_MIMIC = new Predicate<EntityLiving>() {
-		public boolean apply(@Nullable EntityLiving p_apply_1_) {
-			return p_apply_1_ != null && EntitySkeletalParrot.MIMIC_SOUNDS.containsKey(p_apply_1_.getClass());
-		}
-	};
+	private static final Predicate<EntityLiving> CAN_MIMIC = entityLiving -> entityLiving != null && EntitySkeletalParrot.MIMIC_SOUNDS.containsKey(entityLiving.getClass());
 
 	private static final Item DEADLY_ITEM = Items.COOKIE;
-	private static final java.util.Map<Class<? extends Entity>, SoundEvent> MIMIC_SOUNDS = Maps
+	private static final Map<Class<? extends Entity>, SoundEvent> MIMIC_SOUNDS = Maps
 			.newHashMapWithExpectedSize(32);
 	public float flap;
 	public float flapSpeed;
@@ -101,21 +59,6 @@ public class EntitySkeletalParrot extends EntitySkeletal {
 		super(worldIn);
 		this.setSize(0.5F, 0.9F);
 		this.moveHelper = new EntityFlyHelper(this);
-	}
-
-	@Override
-	protected void initEntityAI() {
-		this.tasks.addTask(1, new EntityAISwimming(this));
-		this.tasks.addTask(2, new EntityAIWanderAvoidWaterFlying(this, 1.0D));
-		this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-		this.tasks.addTask(4, new EntityAIAttackMelee(this, 3.0, false));
-		this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 0.8D));
-		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		this.tasks.addTask(6, new EntityAILookIdle(this));
-
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(2, new EntitySkeletal.AIskeletalTarget(this, EntityPlayer.class));
-		this.targetTasks.addTask(3, new EntitySkeletal.AIskeletalTarget(this, EntityIronGolem.class));
 	}
 
 	@Override
@@ -194,7 +137,7 @@ public class EntitySkeletalParrot extends EntitySkeletal {
 	private static boolean playMimicSound(World worldIn, Entity p_192006_1_) {
 		if (!p_192006_1_.isSilent() && worldIn.rand.nextInt(50) == 0) {
 			List<EntityLiving> list = worldIn.getEntitiesWithinAABB(EntityLiving.class,
-					p_192006_1_.getEntityBoundingBox().grow(20.0D), CAN_MIMIC);
+					p_192006_1_.getEntityBoundingBox().grow(20.0D), CAN_MIMIC::test);
 
 			if (!list.isEmpty()) {
 				EntityLiving entityliving = list.get(worldIn.rand.nextInt(list.size()));
@@ -319,6 +262,7 @@ public class EntitySkeletalParrot extends EntitySkeletal {
 		return (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F;
 	}
 
+	@Override
 	public SoundCategory getSoundCategory() {
 		return SoundCategory.NEUTRAL;
 	}

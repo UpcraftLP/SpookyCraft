@@ -1,6 +1,5 @@
 package mod.upcraftlp.spookycraft.entity.monster;
 
-import com.google.common.base.Predicate;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -27,8 +26,10 @@ import javax.annotation.Nullable;
 public class EntitySkeletalLlama extends EntitySkeletal implements IRangedAttackMob{
 	private static final DataParameter<Integer> DATA_STRENGTH_ID = EntityDataManager.createKey(EntitySkeletalLlama.class, DataSerializers.VARINT);
     private boolean didSpit;
+
     @Nullable
     private EntitySkeletalLlama caravanHead;
+
     @Nullable
     private EntitySkeletalLlama caravanTail;
 
@@ -40,7 +41,7 @@ public class EntitySkeletalLlama extends EntitySkeletal implements IRangedAttack
 
     private void setStrength(int strengthIn)
     {
-        this.dataManager.set(DATA_STRENGTH_ID, Integer.valueOf(Math.max(1, Math.min(5, strengthIn))));
+        this.dataManager.set(DATA_STRENGTH_ID, Math.max(1, Math.min(5, strengthIn)));
     }
 
     private void setRandomStrength()
@@ -51,7 +52,7 @@ public class EntitySkeletalLlama extends EntitySkeletal implements IRangedAttack
 
     public int getStrength()
     {
-        return this.dataManager.get(DATA_STRENGTH_ID).intValue();
+        return this.dataManager.get(DATA_STRENGTH_ID);
     }
 
     /**
@@ -77,10 +78,8 @@ public class EntitySkeletalLlama extends EntitySkeletal implements IRangedAttack
     protected void initEntityAI()
     {
         this.tasks.addTask(0, new EntityAISwimming(this));
-        
         this.tasks.addTask(3, new EntityAIAttackRanged(this, 1.25D, 40, 20.0F));
         this.tasks.addTask(3, new EntityAIPanic(this, 1.2D));
-      
         this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 0.7D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
@@ -97,7 +96,7 @@ public class EntitySkeletalLlama extends EntitySkeletal implements IRangedAttack
     protected void entityInit()
     {
         super.entityInit();
-        this.dataManager.register(DATA_STRENGTH_ID, Integer.valueOf(0));
+        this.dataManager.register(DATA_STRENGTH_ID, 0);
        
     }
 
@@ -135,8 +134,6 @@ public class EntitySkeletalLlama extends EntitySkeletal implements IRangedAttack
         
         return livingdata;
     }
-
-   
 
     protected SoundEvent getAngrySound()
     {

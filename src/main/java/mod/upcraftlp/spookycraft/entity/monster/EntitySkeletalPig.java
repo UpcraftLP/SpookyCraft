@@ -1,14 +1,11 @@
 package mod.upcraftlp.spookycraft.entity.monster;
 
-import javax.annotation.Nullable;
-
 import mod.upcraftlp.spookycraft.init.SpookyItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,6 +25,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class EntitySkeletalPig extends EntitySkeletal {
 	private static final DataParameter<Boolean> SADDLED = EntityDataManager.createKey(EntityPig.class,
@@ -80,7 +79,7 @@ public class EntitySkeletalPig extends EntitySkeletal {
 		if (BOOST_TIME.equals(key) && this.world.isRemote) {
 			this.boosting = true;
 			this.boostTime = 0;
-			this.totalBoostTime = this.dataManager.get(BOOST_TIME).intValue();
+			this.totalBoostTime = this.dataManager.get(BOOST_TIME);
 		}
 
 		super.notifyDataManagerChange(key);
@@ -88,8 +87,8 @@ public class EntitySkeletalPig extends EntitySkeletal {
 
 	protected void entityInit() {
 		super.entityInit();
-		this.dataManager.register(SADDLED, Boolean.valueOf(false));
-		this.dataManager.register(BOOST_TIME, Integer.valueOf(0));
+		this.dataManager.register(SADDLED, false);
+		this.dataManager.register(BOOST_TIME, 0);
 	}
 
 	
@@ -158,7 +157,7 @@ public class EntitySkeletalPig extends EntitySkeletal {
 	 * Returns true if the pig is saddled.
 	 */
 	public boolean getSaddled() {
-		return this.dataManager.get(SADDLED).booleanValue();
+		return this.dataManager.get(SADDLED);
 	}
 
 	/**
@@ -166,9 +165,9 @@ public class EntitySkeletalPig extends EntitySkeletal {
 	 */
 	public void setSaddled(boolean saddled) {
 		if (saddled) {
-			this.dataManager.set(SADDLED, Boolean.valueOf(true));
+			this.dataManager.set(SADDLED, true);
 		} else {
-			this.dataManager.set(SADDLED, Boolean.valueOf(false));
+			this.dataManager.set(SADDLED, false);
 		}
 	}
 
