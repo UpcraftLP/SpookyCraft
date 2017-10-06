@@ -18,6 +18,7 @@ import java.util.Locale;
 @GameRegistry.ObjectHolder(Reference.MODID)
 public class SpookySounds {
 
+    //sounds are created by initializing a field for them
     public static final SoundEvent SCARECROW_HURT = null;
     public static final SoundEvent SCARECROW_AMBIENT = null;
     public static final SoundEvent SCARECROW_DEATH = null;
@@ -26,7 +27,7 @@ public class SpookySounds {
     private static class Registry {
 
         @SubscribeEvent
-        public static void onRegisterSounds(RegistryEvent.Register<SoundEvent> event) { //register all sounds here
+        public static void onRegisterSounds(RegistryEvent.Register<SoundEvent> event) {
             for(Field f : SpookySounds.class.getFields()) {
                 register(f.getName().toLowerCase(Locale.ROOT));
             }
