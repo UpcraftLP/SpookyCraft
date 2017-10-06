@@ -43,6 +43,7 @@ public class GuiEncyclopedia extends GuiScreen {
 
     private final List<Entry> entries = Lists.newArrayList();
     private String title;
+    private boolean hasText;
 
     private static ResourceLocation getPageFor(String page) {
         return new ResourceLocation(Reference.MODID, page);
@@ -71,6 +72,7 @@ public class GuiEncyclopedia extends GuiScreen {
                 entries.add(new Entry(page.getCompoundTagAt(index)));
             }
         }
+        else this.hasText = pageNBT.getBoolean("text");
         if(this.pageNBT.getBoolean("displayTitle")) {
             this.title = I18n.format("page." + this.pageNBT.getString("name") + ".title");
         }
@@ -98,11 +100,16 @@ public class GuiEncyclopedia extends GuiScreen {
 
         //(0,0) = top-left corner of page
         x += 33;
-        y += 35;
+        y += 30;
 
-        for(int index = 0; index < entries.size(); index++) {
-            Entry entry = entries.get(index);
-            entry.drawEntry(index, x, y + index * (entryHeight + 1), entryWidth, entryHeight, mouseX, mouseY, false, mc.getRenderPartialTicks());
+        if(!this.entries.isEmpty()) {
+            for(int index = 0; index < entries.size(); index++) {
+                Entry entry = entries.get(index);
+                entry.drawEntry(index, x, y + index * (entryHeight + 1), entryWidth, entryHeight, mouseX, mouseY, false, mc.getRenderPartialTicks());
+            }
+        }
+        else if(this.hasText) {
+            fontRenderer.drawSplitString(I18n.format("page." + this.pageNBT.getString("name") + ".text"), x, y, entryWidth, Color.BLACK.getRGB());
         }
         super.drawScreen(mouseX, mouseY, partialTicks);
         for(int index = 0; index < entries.size(); index++) {
@@ -123,7 +130,7 @@ public class GuiEncyclopedia extends GuiScreen {
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         super.mouseClicked(mouseX, mouseY, mouseButton);
         int x = (this.width - pageWidth) / 2 + 33;
-        int y = 37;
+        int y = 32;
         for (int i = 0; i < this.entries.size(); i++) {
             Entry e = this.entries.get(i);
             if(e.isMouseOver(x, y + entryHeight * i, entryWidth, entryHeight, mouseX, mouseY)) {
@@ -137,10 +144,10 @@ public class GuiEncyclopedia extends GuiScreen {
 
         private String caption;
         private ClickEvent clickEvent;
-        public final String hoverText;
+        private final String hoverText;
         private final ItemStack icon;
 
-        public Entry(NBTTagCompound entryNBT) {
+        Entry(NBTTagCompound entryNBT) {
             String elementBaseText = "entry." + entryNBT.getString("name");
             caption = I18n.format( elementBaseText + ".caption");
             if(entryNBT.hasKey("link")) {
@@ -160,7 +167,7 @@ public class GuiEncyclopedia extends GuiScreen {
             else icon = ItemStack.EMPTY;
         }
 
-        public boolean isMouseOver(int x, int y, int width, int height, int mouseX, int mouseY) {
+        boolean isMouseOver(int x, int y, int width, int height, int mouseX, int mouseY) {
             return mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
         }
 
