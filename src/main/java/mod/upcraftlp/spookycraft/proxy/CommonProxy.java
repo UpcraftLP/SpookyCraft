@@ -7,7 +7,9 @@ import mod.upcraftlp.spookycraft.Reference;
 import mod.upcraftlp.spookycraft.block.fluid.FluidBase;
 import mod.upcraftlp.spookycraft.entity.ModEntities;
 import mod.upcraftlp.spookycraft.init.SpookyFluids;
+import mod.upcraftlp.spookycraft.init.SpookySounds;
 import mod.upcraftlp.spookycraft.net.PacketOpenDocs;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -23,7 +25,8 @@ public class CommonProxy {
         NetworkHandler.registerPacket(PacketOpenDocs.class, PacketOpenDocs.class, Side.CLIENT);
         if(ModConfig.enableUpdateNotification) UpdateChecker.registerMod(Reference.MODID);
         SpookyFluids.init();
-    }
+        
+           }
 
     public void init(FMLInitializationEvent event) {
     	ModEntities.init();
