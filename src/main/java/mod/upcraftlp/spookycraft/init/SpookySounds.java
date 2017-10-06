@@ -9,6 +9,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.commons.codec.language.Soundex;
 
+import java.lang.reflect.Field;
+import java.util.Locale;
+
 /**
  * @author UpcraftLP
  */
@@ -24,9 +27,9 @@ public class SpookySounds {
 
         @SubscribeEvent
         public static void onRegisterSounds(RegistryEvent.Register<SoundEvent> event) { //register all sounds here
-            register("scarecrow_hurt");
-            register("scarecrow_ambient");
-            register("scarecrow_death");
+            for(Field f : SpookySounds.class.getFields()) {
+                register(f.getName().toLowerCase(Locale.ROOT));
+            }
         }
 
         private static SoundEvent register(String soundName) {
