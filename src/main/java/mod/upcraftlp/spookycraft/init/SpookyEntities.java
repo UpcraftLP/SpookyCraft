@@ -76,10 +76,10 @@ public class SpookyEntities {
 
 		/*
 		 * This is the loot table for our mob
-		 */
+		 
 		LootTableList.register(EntityScareCrow.LOOT_CROW);
 		LootTableList.register(EntitySkeletal.LOOT_SKELETAL);
-
+*/
 	}
 
 	private static ResourceLocation getEntityResource(String entityName) {
