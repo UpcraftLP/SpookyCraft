@@ -1,5 +1,6 @@
 {
   "name": "pumpkins_2",
   "displayTitle": true,
-  "text": true
+  "text": true,
+  "image": "spookycraft:pages/test_screenshot.png"
 }

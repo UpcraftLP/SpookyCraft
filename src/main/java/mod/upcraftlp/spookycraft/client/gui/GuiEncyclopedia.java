@@ -21,6 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.event.ClickEvent;
 import net.minecraftforge.common.util.Constants;
 
@@ -39,11 +40,15 @@ public class GuiEncyclopedia extends GuiScreen {
     private static final int pageWidth = 192;
     private static final int pageHeight = 192;
     private static final int entryHeight = 18;
-    private static final int entryWidth = 120;
+    private static final int entryWidth = 121;
+    private static ResourceLocation last = INDEX_PAGE;
+    private ResourceLocation currentPage;
 
     private final List<Entry> entries = Lists.newArrayList();
     private String title;
     private boolean hasText;
+    private ResourceLocation image;
+    private int[] imageData = new int[2];
 
     private static ResourceLocation getPageFor(String page) {
         return new ResourceLocation(Reference.MODID, page);
@@ -56,6 +61,12 @@ public class GuiEncyclopedia extends GuiScreen {
             page = INDEX_PAGE;
         }
         this.pageNBT = EncyclopediaReader.readJsonToNbt(page);
+        currentPage = page;
+    }
+
+    @Override
+    public void onGuiClosed() {
+        last = this.currentPage;
     }
 
     @Override
@@ -72,24 +83,31 @@ public class GuiEncyclopedia extends GuiScreen {
                 entries.add(new Entry(page.getCompoundTagAt(index)));
             }
         }
-        else this.hasText = pageNBT.getBoolean("text");
+        else {
+            this.hasText = pageNBT.getBoolean("text");
+            if(pageNBT.hasKey("image", Constants.NBT.TAG_STRING)) {
+                this.image = ClientUtil.loadTexture(new ResourceLocation(pageNBT.getString("image")), imageData);
+            }
+        }
         if(this.pageNBT.getBoolean("displayTitle")) {
             this.title = I18n.format("page." + this.pageNBT.getString("name") + ".title");
         }
-        this.addButton(new GuiButton(0, (this.width + pageWidth) / 2 - 50, (this.height + pageHeight) / 2 - 30, 70, 20, I18n.format("button.back.name")));
+        this.addButton(new GuiButton(0, (this.width + pageWidth) / 2 - 50, (this.height + pageHeight) / 2 - 30, 70, 20, ""));
     }
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
         if(button.id == 0) {
-            mc.displayGuiScreen(new GuiEncyclopedia(INDEX_PAGE));
-            return;
+            if(this.currentPage == INDEX_PAGE) mc.displayGuiScreen(null); //close screen
+            else if(GuiScreen.isShiftKeyDown() || last == null) mc.displayGuiScreen(new GuiEncyclopedia(INDEX_PAGE));
+            else mc.displayGuiScreen(new GuiEncyclopedia(last));
         }
         super.actionPerformed(button);
     }
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        this.buttonList.get(0).displayString = this.currentPage == INDEX_PAGE ? TextFormatting.RED + I18n.format("button.close.name") : isShiftKeyDown() || last == null ? TextFormatting.ITALIC.toString() + TextFormatting.AQUA.toString() + I18n.format("button.index.name") : I18n.format("button.back.name");
         mc.getTextureManager().bindTexture(BOOK_GUI_TEXTURES);
         int x = (this.width - pageWidth) / 2;
         int y = 2;
@@ -99,7 +117,7 @@ public class GuiEncyclopedia extends GuiScreen {
         drawCenteredString(mc.fontRenderer, this.title, this.width / 2, y + 15, Color.RED.getRGB());
 
         //(0,0) = top-left corner of page
-        x += 33;
+        x += 32;
         y += 30;
 
         if(!this.entries.isEmpty()) {
@@ -108,9 +126,26 @@ public class GuiEncyclopedia extends GuiScreen {
                 entry.drawEntry(index, x, y + index * (entryHeight + 1), entryWidth, entryHeight, mouseX, mouseY, false, mc.getRenderPartialTicks());
             }
         }
-        else if(this.hasText) {
-            fontRenderer.drawSplitString(I18n.format("page." + this.pageNBT.getString("name") + ".text"), x, y, entryWidth, Color.BLACK.getRGB());
+        else {
+            if(this.image != null && this.image != TextureMap.LOCATION_MISSING_TEXTURE) {
+                float width = this.pageNBT.getInteger("imageSize");
+                if(width <= 0) width = entryWidth;
+                float height = imageData[1] * (width / imageData[0]);
+
+                GlStateManager.pushMatrix();
+                GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                mc.renderEngine.bindTexture(this.image);
+                drawScaledCustomSizeModalRect(x, y, 0, 0, imageData[0], imageData[1], (int) width, (int) height, imageData[0], imageData[1]);
+                GlStateManager.popMatrix();
+                y+= height + 2;
+                x += 1;
+            }
+            if(this.hasText) {
+                fontRenderer.drawSplitString(I18n.format("page." + this.pageNBT.getString("name") + ".text"), x, y, entryWidth, Color.BLACK.getRGB());
+            }
         }
+
+
         super.drawScreen(mouseX, mouseY, partialTicks);
         for(int index = 0; index < entries.size(); index++) {
             Entry entry = entries.get(index);
@@ -129,7 +164,7 @@ public class GuiEncyclopedia extends GuiScreen {
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         super.mouseClicked(mouseX, mouseY, mouseButton);
-        int x = (this.width - pageWidth) / 2 + 33;
+        int x = (this.width - pageWidth) / 2 + 32;
         int y = 32;
         for (int i = 0; i < this.entries.size(); i++) {
             Entry e = this.entries.get(i);

@@ -31,6 +31,8 @@ entity.SkeletalSheep.name=Skeletal Sheep
 
 #Encyclopedia
 button.back.name=Back
+button.close.name=Close
+button.index.name=Index
 page.index.title=Index
 entry.pumpkins.caption=Pumpkins
 entry.pumpkins.hover=Spooky Decorations
