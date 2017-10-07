@@ -15,7 +15,7 @@ fluid.spookycraft.bone_milk=Bone Milk
 #Misc
 itemGroup.spooky.name=SpookyCraft
 item.encyclopedia.name=Arcane Encyclopedia
-item.encyclopedia.name=Arcane Encyclopedia
+item.bone_milk_bottle.name=Bottle of Bone Milk
 
 #Entities
 entity.ScareCrow.name=Scarecrow

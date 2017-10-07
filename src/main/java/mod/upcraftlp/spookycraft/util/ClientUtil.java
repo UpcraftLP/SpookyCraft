@@ -43,8 +43,8 @@ public class ClientUtil { //TODO move to library
             data[1] = img.getHeight();
             dest = Minecraft.getMinecraft().getTextureManager().getDynamicTextureLocation(location.getResourceDomain(), new DynamicTexture(img));
         } catch (Exception e) {
-            e.printStackTrace();
             dest = TextureMap.LOCATION_MISSING_TEXTURE;
+            Main.getLogger().warn("Image not found:" + location);
         }
         return dest;
     }

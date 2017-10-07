@@ -3,7 +3,6 @@ package mod.upcraftlp.spookycraft.item;
 import core.upcraftlp.craftdev.api.item.ItemFood;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
@@ -13,6 +12,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemSpecialCandy extends ItemFood {
 	public ItemSpecialCandy() {
 		super("candy_bag", 10, 8.0f ,false);
+		this.setFull3D();
+		this.setAlwaysEdible();
 	}
 
 	@SideOnly(Side.CLIENT)

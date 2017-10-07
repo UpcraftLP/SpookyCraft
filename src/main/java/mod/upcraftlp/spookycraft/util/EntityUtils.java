@@ -49,8 +49,6 @@ public class EntityUtils {
                         entity.setPosition(i1, j1, k1);
                         if(!world.isAnyPlayerWithinRangeAt(i1, j1, k1, 7.0D) && world.checkNoEntityCollision(entity.getEntityBoundingBox(), entity) && world.getCollisionBoxes(entity, entity.getEntityBoundingBox()).isEmpty() && !world.containsAnyLiquid(entity.getEntityBoundingBox())) {
                             world.spawnEntity(entity);
-                            entity.onInitialSpawn(world.getDifficultyForLocation(entity.getPosition()), null);
-                            entity.getEntityAttribute(SPAWN_REINFORCEMENTS_CHANCE).applyModifier(new AttributeModifier("Zombie reinforcement callee charge", -0.05000000074505806D, 0));
                             entityList.add(entity);
                             break;
                         }

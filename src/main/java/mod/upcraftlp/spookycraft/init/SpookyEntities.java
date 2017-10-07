@@ -5,17 +5,7 @@ import java.awt.Color;
 import mod.upcraftlp.spookycraft.Main;
 import mod.upcraftlp.spookycraft.Reference;
 import mod.upcraftlp.spookycraft.entity.different.EntityMirror;
-import mod.upcraftlp.spookycraft.entity.monster.EntityScareCrow;
-import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletal;
-import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalBat;
-import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalChicken;
-import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalCow;
-import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalOcelot;
-import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalParrot;
-import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalPig;
-import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalRabbit;
-import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalSheep;
-import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalWolf;
+import mod.upcraftlp.spookycraft.entity.monster.*;
 import net.minecraft.entity.EntityLiving.SpawnPlacementType;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EnumCreatureType;
@@ -28,20 +18,22 @@ public class SpookyEntities {
 
 	private static final int eggPrimary = new Color(0x000000).getRGB();
 	private static final int eggSecondary = new Color(0x974F1E).getRGB();
+	private static int entityID = 0;
 
 	public static void init() {
-		EntityRegistry.registerModEntity(getEntityResource("ScareCrow"), EntityScareCrow.class, "ScareCrow", 0, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
+		EntityRegistry.registerModEntity(getEntityResource("ScareCrow"), EntityScareCrow.class, "ScareCrow", entityID++, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
 		//FIXME re-enable once finished!
-		//EntityRegistry.registerModEntity(getEntityResource("Mirror"), EntityMirror.class, "Mirror", 1, Main.INSTANCE, 80, 3, false, eggPrimary, egg);
-		EntityRegistry.registerModEntity(getEntityResource("SkeletalBat"), EntitySkeletalBat.class, "SkeletalBat", 2, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
-		EntityRegistry.registerModEntity(getEntityResource("SkeletalChicken"), EntitySkeletalChicken.class, "SkeletalChicken", 3, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
-		EntityRegistry.registerModEntity(getEntityResource("SkeletalCow"), EntitySkeletalCow.class, "SkeletalCow", 4, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
-		EntityRegistry.registerModEntity(getEntityResource("SkeletalParrot"), EntitySkeletalParrot.class, "SkeletalParrot", 5, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
-		EntityRegistry.registerModEntity(getEntityResource("SkeletalPig"), EntitySkeletalPig.class, "SkeletalPig", 6, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
-		EntityRegistry.registerModEntity(getEntityResource("SkeletalWolf"), EntitySkeletalWolf.class, "SkeletalWolf", 7, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
-		EntityRegistry.registerModEntity(getEntityResource("SkeletalRabbit"), EntitySkeletalRabbit.class, "SkeletalRabbit", 8, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
-		EntityRegistry.registerModEntity(getEntityResource("SkeletalSheep"), EntitySkeletalSheep.class, "SkeletalSheep", 9, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
-		EntityRegistry.registerModEntity(getEntityResource("SkeletalOcelot"), EntitySkeletalOcelot.class, "SkeletalOcelot", 10, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
+		//EntityRegistry.registerModEntity(getEntityResource("Mirror"), EntityMirror.class, "Mirror", entityID++, Main.INSTANCE, 80, 3, false, eggPrimary, egg);
+		EntityRegistry.registerModEntity(getEntityResource("SkeletalBat"), EntitySkeletalBat.class, "SkeletalBat", entityID++, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
+		EntityRegistry.registerModEntity(getEntityResource("SkeletalChicken"), EntitySkeletalChicken.class, "SkeletalChicken", entityID++, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
+		EntityRegistry.registerModEntity(getEntityResource("SkeletalCow"), EntitySkeletalCow.class, "SkeletalCow", entityID++, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
+		EntityRegistry.registerModEntity(getEntityResource("SkeletalParrot"), EntitySkeletalParrot.class, "SkeletalParrot", entityID++, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
+		EntityRegistry.registerModEntity(getEntityResource("SkeletalPig"), EntitySkeletalPig.class, "SkeletalPig", entityID++, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
+		EntityRegistry.registerModEntity(getEntityResource("SkeletalWolf"), EntitySkeletalWolf.class, "SkeletalWolf", entityID++, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
+		EntityRegistry.registerModEntity(getEntityResource("SkeletalRabbit"), EntitySkeletalRabbit.class, "SkeletalRabbit", entityID++, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
+		EntityRegistry.registerModEntity(getEntityResource("SkeletalSheep"), EntitySkeletalSheep.class, "SkeletalSheep", entityID++, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
+		EntityRegistry.registerModEntity(getEntityResource("SkeletalOcelot"), EntitySkeletalOcelot.class, "SkeletalOcelot", entityID++, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
+		EntityRegistry.registerModEntity(getEntityResource("SkeletalLlama"), EntitySkeletalLlama.class, "SkeletalLlama", entityID++, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
 
 		/*
 		 * We want our mob to spawn in biomes. If you
@@ -56,8 +48,9 @@ public class SpookyEntities {
 		EntityRegistry.addSpawn(EntitySkeletalPig.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
 		EntityRegistry.addSpawn(EntitySkeletalWolf.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
 		EntityRegistry.addSpawn(EntitySkeletalRabbit.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
-		EntityRegistry.addSpawn(EntitySkeletalOcelot.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.JUNGLE, Biomes.JUNGLE_EDGE, Biomes.JUNGLE_HILLS, Biomes.MUTATED_JUNGLE, Biomes.MUTATED_JUNGLE_EDGE);
+		EntityRegistry.addSpawn(EntitySkeletalOcelot.class, 10, 1, 4, EnumCreatureType.MONSTER, Biomes.JUNGLE, Biomes.JUNGLE_EDGE, Biomes.JUNGLE_HILLS, Biomes.MUTATED_JUNGLE, Biomes.MUTATED_JUNGLE_EDGE);
 		EntityRegistry.addSpawn(EntitySkeletalSheep.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+		EntityRegistry.addSpawn(EntitySkeletalLlama.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.SAVANNA);
 
 		/*
 		 * Mob Placement
@@ -73,6 +66,7 @@ public class SpookyEntities {
 		EntitySpawnPlacementRegistry.setPlacementType(EntitySkeletalOcelot.class, SpawnPlacementType.ON_GROUND);
 		EntitySpawnPlacementRegistry.setPlacementType(EntitySkeletalSheep.class, SpawnPlacementType.ON_GROUND);
 		EntitySpawnPlacementRegistry.setPlacementType(EntitySkeletalRabbit.class, SpawnPlacementType.ON_GROUND);
+		EntitySpawnPlacementRegistry.setPlacementType(EntitySkeletalLlama.class, SpawnPlacementType.ON_GROUND);
 
 		/*
 		 * This is the loot table for our mob
