@@ -36,15 +36,16 @@ public class SpookyEntities {
 		EntityRegistry.registerModEntity(getEntityResource("SkeletalLlama"), EntitySkeletalLlama.class, "SkeletalLlama", entityID++, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
 
 		/*
-		 * We want our mob to spawn in biomes. If you
-		 * don't add this then it will not spawn automatically but you can of
-		 * course still make it spawn manually
+		 * We want our mob to spawn in biomes. If you don't add this then it
+		 * will not spawn automatically but you can of course still make it
+		 * spawn manually
 		 */
 		EntityRegistry.addSpawn(EntityScareCrow.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
 		EntityRegistry.addSpawn(EntitySkeletalBat.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
 		EntityRegistry.addSpawn(EntitySkeletalChicken.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
 		EntityRegistry.addSpawn(EntitySkeletalCow.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
-		EntityRegistry.addSpawn(EntitySkeletalParrot.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.JUNGLE, Biomes.JUNGLE_EDGE, Biomes.JUNGLE_HILLS, Biomes.MUTATED_JUNGLE, Biomes.MUTATED_JUNGLE_EDGE);
+		EntityRegistry.addSpawn(EntitySkeletalParrot.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.JUNGLE,
+				Biomes.JUNGLE_EDGE, Biomes.JUNGLE_HILLS, Biomes.MUTATED_JUNGLE, Biomes.MUTATED_JUNGLE_EDGE);
 		EntityRegistry.addSpawn(EntitySkeletalPig.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
 		EntityRegistry.addSpawn(EntitySkeletalWolf.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
 		EntityRegistry.addSpawn(EntitySkeletalRabbit.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
@@ -70,10 +71,10 @@ public class SpookyEntities {
 
 		/*
 		 * This is the loot table for our mob
+		 * 
+		 * LootTableList.register(EntityScareCrow.LOOT_CROW);
+		 * LootTableList.register(EntitySkeletal.LOOT_SKELETAL);
 		 */
-		LootTableList.register(EntityScareCrow.LOOT_CROW);
-		LootTableList.register(EntitySkeletal.LOOT_SKELETAL);
-
 	}
 
 	private static ResourceLocation getEntityResource(String entityName) {
