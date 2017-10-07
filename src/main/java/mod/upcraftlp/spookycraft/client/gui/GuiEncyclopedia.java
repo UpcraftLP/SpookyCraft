@@ -125,27 +125,23 @@ public class GuiEncyclopedia extends GuiScreen {
                 Entry entry = entries.get(index);
                 entry.drawEntry(index, x, y + index * (entryHeight + 1), entryWidth, entryHeight, mouseX, mouseY, false, mc.getRenderPartialTicks());
             }
+            y += this.entries.size() * (entryHeight + 1) + 2;
         }
-        else {
-            if(this.image != null && this.image != TextureMap.LOCATION_MISSING_TEXTURE) {
-                float width = this.pageNBT.getInteger("imageSize");
-                if(width <= 0) width = entryWidth;
-                float height = imageData[1] * (width / imageData[0]);
-
-                GlStateManager.pushMatrix();
-                GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-                mc.renderEngine.bindTexture(this.image);
-                drawScaledCustomSizeModalRect(x, y, 0, 0, imageData[0], imageData[1], (int) width, (int) height, imageData[0], imageData[1]);
-                GlStateManager.popMatrix();
-                y+= height + 2;
-                x += 1;
-            }
-            if(this.hasText) {
-                fontRenderer.drawSplitString(I18n.format("page." + this.pageNBT.getString("name") + ".text"), x, y, entryWidth, Color.BLACK.getRGB());
-            }
+        if(this.image != null && this.image != TextureMap.LOCATION_MISSING_TEXTURE) {
+            float width = this.pageNBT.getInteger("imageSize");
+            if(width <= 0) width = entryWidth;
+            float height = imageData[1] * (width / imageData[0]);
+            GlStateManager.pushMatrix();
+            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            mc.renderEngine.bindTexture(this.image);
+            drawScaledCustomSizeModalRect(x, y, 0, 0, imageData[0], imageData[1], (int) width, (int) height, imageData[0], imageData[1]);
+            GlStateManager.popMatrix();
+            y+= height + 2;
         }
-
-
+        x += 1;
+        if(this.hasText) {
+            fontRenderer.drawSplitString(I18n.format("page." + this.pageNBT.getString("name") + ".text"), x, y, entryWidth, Color.BLACK.getRGB());
+        }
         super.drawScreen(mouseX, mouseY, partialTicks);
         for(int index = 0; index < entries.size(); index++) {
             Entry entry = entries.get(index);
