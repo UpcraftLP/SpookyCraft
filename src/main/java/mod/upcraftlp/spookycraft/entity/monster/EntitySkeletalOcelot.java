@@ -3,17 +3,13 @@ package mod.upcraftlp.spookycraft.entity.monster;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIOcelotAttack;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
 
 public class EntitySkeletalOcelot extends EntitySkeletal {
 
@@ -122,24 +118,5 @@ public class EntitySkeletalOcelot extends EntitySkeletal {
 		}
 
 		return false;
-	}
-
-	/**
-	 * Called only once on an entity when first time spawned, via egg, mob
-	 * spawner, natural spawning etc, but not called when entity is reloaded
-	 * from nbt. Mainly used for initializing attributes and inventory
-	 */
-	@Nullable
-	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
-		livingdata = super.onInitialSpawn(difficulty, livingdata);
-
-		for (int i = 0; i < 2; ++i) {
-			EntitySkeletalOcelot entityocelot = new EntitySkeletalOcelot(this.world);
-			entityocelot.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);
-
-			this.world.spawnEntity(entityocelot);
-		}
-
-		return livingdata;
 	}
 }

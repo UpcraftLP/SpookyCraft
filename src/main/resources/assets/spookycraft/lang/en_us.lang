@@ -18,7 +18,7 @@ item.encyclopedia.name=Arcane Encyclopedia
 item.encyclopedia.name=Arcane Encyclopedia
 
 #Entities
-entity.ScareCrow.name=Scare Crow
+entity.ScareCrow.name=Scarecrow
 entity.SkeletalBat.name=Skeletal Bat
 entity.SkeletalChicken.name=Skeletal Chicken
 entity.SkeletalCow.name=Skeletal Cow
@@ -37,3 +37,4 @@ page.index.title=Index
 entry.pumpkins.caption=Pumpkins
 entry.pumpkins.hover=Spooky Decorations
 page.pumpkins_2.text=Pumpkins are special.\nRight-click a pumpkin with a torch to turn it into some creepy lantern ;)
+page.candybag.text=Only obtainable by striking a Skeleton pig with lightning.\nWill give some nice buffs ;)
