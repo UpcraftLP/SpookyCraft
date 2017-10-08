@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "spookycraft:candy_corn",
+      "data": 0
+    },
+    {
+      "item": "minecraft:book",
+      "data": 0
+    }
+  ],
+  "result": {
+    "item": "spookycraft:encyclopedia",
+    "data": 0
+  }
+}
