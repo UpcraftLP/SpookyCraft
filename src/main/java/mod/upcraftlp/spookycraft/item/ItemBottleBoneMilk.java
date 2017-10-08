@@ -8,6 +8,9 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
 /**
@@ -18,6 +21,12 @@ public class ItemBottleBoneMilk extends Item {
     public ItemBottleBoneMilk() {
         super("bone_milk_bottle");
         this.setMaxStackSize(16);
+    }
+
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+        playerIn.setActiveHand(handIn);
+        return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
 
     @Override
