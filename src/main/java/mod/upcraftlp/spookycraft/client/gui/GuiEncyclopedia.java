@@ -2,7 +2,6 @@ package mod.upcraftlp.spookycraft.client.gui;
 
 import com.google.common.collect.Lists;
 import jline.internal.Nullable;
-import mod.upcraftlp.spookycraft.Main;
 import mod.upcraftlp.spookycraft.Reference;
 import mod.upcraftlp.spookycraft.util.ClientUtil;
 import mod.upcraftlp.spookycraft.util.EncyclopediaReader;
@@ -37,20 +36,19 @@ import java.util.List;
  */
 public class GuiEncyclopedia extends GuiScreen {
 
-    private static final Minecraft mc = Minecraft.getMinecraft();
+    private static final Minecraft MC = Minecraft.getMinecraft();
     private static final ResourceLocation BOOK_GUI_TEXTURES = new ResourceLocation("textures/gui/book.png");
     private static final ResourceLocation INDEX_PAGE = getPageFor("index");
-    private static final int pageWidth = 192;
-    private static final int pageHeight = 192;
-    private static final int entryHeight = 18;
-    private static final int entryWidth = 121;
+    private static final int PAGE_WIDTH = 192;
+    private static final int PAGE_HEIGHT = 192;
+    private static final int ENTRY_HEIGHT = 18;
+    private static final int ENTRY_WIDTH = 121;
     private static ResourceLocation last = INDEX_PAGE;
 
-
-    private static final int textColor  = 0x000000; //black
-    private static final int titleColor = 0xFF0000; //red
-    private static final int entryColor = 0xFFFFFF; //white
-    private static final float mouseScrollMultiplier = 10.0F;
+    private static final int TEXT_COLOR = 0x000000; //black
+    private static final int TITLE_COLOR = 0xFF0000; //red
+    private static final int ENTRY_COLOR = 0xFFFFFF; //white
+    private static final float MOUSE_SCROLL_MULTIPLIER = 10.0F;
 
     private ResourceLocation currentPage;                       //Page order:
     private String title;                                       //title
@@ -103,16 +101,16 @@ public class GuiEncyclopedia extends GuiScreen {
         if(this.pageNBT.getBoolean("displayTitle")) {
             this.title = I18n.format("page." + this.pageNBT.getString("name") + ".title");
         }
-        this.addButton(new GuiButton(0, (this.width + pageWidth) / 2 - 50, (this.height + pageHeight) / 2 - 30, 70, 20, ""));
+        this.addButton(new GuiButton(0, (this.width + PAGE_WIDTH) / 2 - 50, (this.height + PAGE_HEIGHT) / 2 - 30, 70, 20, ""));
         this.text = I18n.format("page." + this.pageNBT.getString("name") + ".text");
     }
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
         if(button.id == 0) {
-            if(this.currentPage == INDEX_PAGE) mc.displayGuiScreen(null); //close screen
-            else if(GuiScreen.isShiftKeyDown() || last == null) mc.displayGuiScreen(new GuiEncyclopedia(INDEX_PAGE));
-            else mc.displayGuiScreen(new GuiEncyclopedia(last));
+            if(this.currentPage == INDEX_PAGE) MC.displayGuiScreen(null); //close screen
+            else if(GuiScreen.isShiftKeyDown() || last == null) MC.displayGuiScreen(new GuiEncyclopedia(INDEX_PAGE));
+            else MC.displayGuiScreen(new GuiEncyclopedia(last));
         }
         super.actionPerformed(button);
     }
@@ -120,14 +118,14 @@ public class GuiEncyclopedia extends GuiScreen {
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.buttonList.get(0).displayString = this.currentPage == INDEX_PAGE ? TextFormatting.RED + I18n.format("button.close.name") : isShiftKeyDown() || last == null ? TextFormatting.ITALIC.toString() + TextFormatting.AQUA.toString() + I18n.format("button.index.name") : I18n.format("button.back.name");
-        mc.getTextureManager().bindTexture(BOOK_GUI_TEXTURES);
-        int x = (this.width - pageWidth) / 2;
+        MC.getTextureManager().bindTexture(BOOK_GUI_TEXTURES);
+        int x = (this.width - PAGE_WIDTH) / 2;
         int y = 2;
-        this.drawTexturedModalRect(x, y, 0, 0, pageWidth, pageHeight); //background
+        this.drawTexturedModalRect(x, y, 0, 0, PAGE_WIDTH, PAGE_HEIGHT); //background
         if(this.title != null) {
             int fontHeight = fontRenderer.FONT_HEIGHT;
             fontRenderer.FONT_HEIGHT = 10;
-            fontRenderer.drawString(this.title, (this.width - fontRenderer.getStringWidth(this.title)) / 2, y + 15, titleColor);
+            fontRenderer.drawString(this.title, (this.width - fontRenderer.getStringWidth(this.title)) / 2, y + 15, TITLE_COLOR);
             fontRenderer.FONT_HEIGHT = fontHeight;
         }
         //(x,y) = top-left corner of actual page
@@ -136,11 +134,11 @@ public class GuiEncyclopedia extends GuiScreen {
         if(this.image != null && this.image != TextureMap.LOCATION_MISSING_TEXTURE) {
             y += 20;
             float width = this.pageNBT.getInteger("imageSize");
-            if(width <= 0) width = entryWidth;
+            if(width <= 0) width = ENTRY_WIDTH;
             float height = imageData[1] * (width / imageData[0]);
             GlStateManager.pushMatrix();
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-            mc.renderEngine.bindTexture(this.image);
+            MC.renderEngine.bindTexture(this.image);
             drawScaledCustomSizeModalRect(x, y, 0, 0, imageData[0], imageData[1], (int) width, (int) height, imageData[0], imageData[1]);
             GlStateManager.popMatrix();
             y+= height + 2;
@@ -148,28 +146,28 @@ public class GuiEncyclopedia extends GuiScreen {
         if(!this.entries.isEmpty()) {
             for(int index = 0; index < entries.size(); index++) {
                 Entry entry = entries.get(index);
-                y += entryHeight + 1;
-                entry.drawEntry(index, x, y, entryWidth, entryHeight, mouseX, mouseY, false, mc.getRenderPartialTicks());
+                y += ENTRY_HEIGHT + 1;
+                entry.drawEntry(index, x, y, ENTRY_WIDTH, ENTRY_HEIGHT, mouseX, mouseY, false, MC.getRenderPartialTicks());
             }
             y +=  2;
         }
         x += 1;
         if(this.hasText) {
-            int textWidth = entryWidth - 1;
+            int textWidth = ENTRY_WIDTH - 1;
             int lineHeight = fontRenderer.FONT_HEIGHT + 1;
             List<String> pageStrings = fontRenderer.listFormattedStringToWidth(this.text, textWidth);
             int offsetLines = this.listY / lineHeight;
             int drawIndex = 0;
             for(int index = offsetLines; index < pageStrings.size(); index++) {
                 int drawY = y + drawIndex++ * lineHeight;
-                if(drawY > pageHeight - 25) break;
+                if(drawY > PAGE_HEIGHT - 25) break;
                 String text = pageStrings.get(index);
-                if(!text.isEmpty()) fontRenderer.drawString(text, x, drawY, textColor);
+                if(!text.isEmpty()) fontRenderer.drawString(text, x, drawY, TEXT_COLOR);
             }
         }
         super.drawScreen(mouseX, mouseY, partialTicks);
         for (Entry entry : entries) {
-            if (entry.hoverText != null && entry.isMouseOver(entryWidth, entryHeight, mouseX, mouseY)) {
+            if (entry.hoverText != null && entry.isMouseOver(ENTRY_WIDTH, ENTRY_HEIGHT, mouseX, mouseY)) {
                 drawHoveringText(entry.hoverText, mouseX, mouseY);
                 break;
             }
@@ -184,18 +182,18 @@ public class GuiEncyclopedia extends GuiScreen {
     @Override
     public void handleMouseInput() throws IOException {
         super.handleMouseInput();
-        int scroll = (int) - (Math.signum(Mouse.getEventDWheel()) * mouseScrollMultiplier);
-        this.listY = MathHelper.clamp(this.listY + scroll, 0, fontRenderer.getWordWrappedHeight(this.text, entryWidth - 1) - 50);
+        int scroll = (int) - (Math.signum(Mouse.getEventDWheel()) * MOUSE_SCROLL_MULTIPLIER);
+        this.listY = MathHelper.clamp(this.listY + scroll, 0, fontRenderer.getWordWrappedHeight(this.text, ENTRY_WIDTH - 1) - 50);
     }
 
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         super.mouseClicked(mouseX, mouseY, mouseButton);
-        int x = (this.width - pageWidth) / 2 + 32;
+        int x = (this.width - PAGE_WIDTH) / 2 + 32;
         int y = 32;
         for (int i = 0; i < this.entries.size(); i++) {
             Entry e = this.entries.get(i);
-            if(e.isMouseOver(entryWidth, entryHeight, mouseX, mouseY)) {
+            if(e.isMouseOver(ENTRY_WIDTH, ENTRY_HEIGHT, mouseX, mouseY)) {
                 e.mousePressed(i, mouseX, mouseY, mouseButton, mouseX, mouseY);
                 break;
             }
@@ -240,20 +238,20 @@ public class GuiEncyclopedia extends GuiScreen {
             this.y = y;
             drawRect(x, y - 1, x + listWidth, y, Color.WHITE.getRGB());
             drawRect(x, y, x + listWidth, y + slotHeight, this.isMouseOver(listWidth, slotHeight, mouseX, mouseY) ? Color.BLACK.getRGB() : Color.GRAY.getRGB());
-            mc.fontRenderer.drawString(caption, x + 18, y + (slotHeight - mc.fontRenderer.FONT_HEIGHT) / 2, entryColor);
+            MC.fontRenderer.drawString(caption, x + 18, y + (slotHeight - MC.fontRenderer.FONT_HEIGHT) / 2, ENTRY_COLOR);
             if(!this.icon.isEmpty()) {
                 GlStateManager.pushMatrix();
                 RenderHelper.enableGUIStandardItemLighting();
-                mc.getRenderItem().renderItemAndEffectIntoGUI(this.icon, x, y + 1);
+                MC.getRenderItem().renderItemAndEffectIntoGUI(this.icon, x, y + 1);
                 GlStateManager.popMatrix();
             }
         }
 
         @Override
         public boolean mousePressed(int slotIndex, int mouseX, int mouseY, int mouseEvent, int relativeX, int relativeY) {
-            mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+            MC.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0F));
             if(this.clickEvent.getAction() == ClickEvent.Action.OPEN_URL) ClientUtil.openLink(this.clickEvent.getValue());
-            else mc.displayGuiScreen(new GuiEncyclopedia(new ResourceLocation(this.clickEvent.getValue())));
+            else MC.displayGuiScreen(new GuiEncyclopedia(new ResourceLocation(this.clickEvent.getValue())));
             return true;
         }
 
