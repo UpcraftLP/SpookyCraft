@@ -30,7 +30,7 @@ public class EncyclopediaReader { //FIXME move to library
                 while(sc.hasNext()) builder.append(sc.next());
                 return JsonToNBT.getTagFromJson(builder.toString());
             } catch (Exception e) {
-                Main.getLogger().error("Exception reading " + location + ", defaulting to empty NBT compound!");
+                Main.getLogger().error("Exception reading " + location + ", defaulting to empty page!");
 
             }
             finally {

@@ -33,8 +33,23 @@ entity.SkeletalSheep.name=Skeletal Sheep
 button.back.name=Back
 button.close.name=Close
 button.index.name=Index
+
+#Encyclopedia: Index
 page.index.title=Index
+
+entry.candy.caption=Candy
+entry.candy.hover=Oh, sweet!
+
 entry.pumpkins.caption=Pumpkins
 entry.pumpkins.hover=Spooky Decorations
-page.pumpkins_2.text=Pumpkins are special.\nRight-click a pumpkin with a torch to turn it into some creepy lantern ;)
-page.candybag.text=Only obtainable by striking a Skeleton pig with lightning.\nWill give some nice buffs ;)
+
+entry.skeletals.caption=Skeletals
+entry.skeletals.hover=Spooky Fellows
+
+#Encyclopedia entries
+page.pumpkins.title=Pumpkins
+page.pumpkins.text=Pumpkins are a nice Decoration!\nRight-click a pumpkin with a torch to turn it into an evil, creepy lantern.
+page.candy.title=Sweet Candy
+page.candy.text=The Candy Bag is an exclusive item that is quite difficult to get!\nThe only known way is to strike a skeletal pig with lightning, this will mutate him into a wither skeleton who holds the rich Candy Bag!\n§cTip: §r§oUse Looting\n\n§rThe Candy Corn is a simple treat, its known to linger inside the bones of Skeletals, when you hit a skeletal you may scratch one off, beware however, these skeletals dont like to be fooled with!
+page.skeletals.title=Skeletals
+page.skeletals.text=Skeletals are the undead souls of those animals you've hunted and killed. They are here to take revenge on what you did to them.\nYour dead pets will come and haunt you too, so think about what you kill!\n - Won’t burn in sunlight but will only be aggressive during the night\n - Skeleton Cows have been known to produce Pure milk

@@ -3,16 +3,21 @@
   "displayTitle": true,
   "elements": [
     {
-      "name": "pumpkins",
-      "icon": "minecraft:lit_pumpkin",
-      "link": "spookycraft:pumpkins_1",
+      "name": "candy",
+      "icon": "spookycraft:candy_bag",
+      "link": "spookycraft:candy",
       "hover": true
     },
     {
-      "name": "magic",
-      "icon": "minecraft:ender_pearl",
-      "link": "http://google.com/",
-      "isLink": true,
+      "name": "pumpkins",
+      "icon": "minecraft:pumpkin",
+      "link": "spookycraft:pumpkins",
+      "hover": true
+    },
+    {
+      "name": "skeletals",
+      "icon": "minecraft:bone",
+      "link": "spookycraft:skeletals",
       "hover": true
     }
   ]

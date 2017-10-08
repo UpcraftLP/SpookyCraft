@@ -2,6 +2,7 @@ package mod.upcraftlp.spookycraft.client.gui;
 
 import com.google.common.collect.Lists;
 import jline.internal.Nullable;
+import mod.upcraftlp.spookycraft.Main;
 import mod.upcraftlp.spookycraft.Reference;
 import mod.upcraftlp.spookycraft.util.ClientUtil;
 import mod.upcraftlp.spookycraft.util.EncyclopediaReader;
@@ -21,9 +22,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.event.ClickEvent;
 import net.minecraftforge.common.util.Constants;
+import org.lwjgl.input.Mouse;
 
 import java.awt.*;
 import java.io.IOException;
@@ -42,13 +45,21 @@ public class GuiEncyclopedia extends GuiScreen {
     private static final int entryHeight = 18;
     private static final int entryWidth = 121;
     private static ResourceLocation last = INDEX_PAGE;
-    private ResourceLocation currentPage;
 
-    private final List<Entry> entries = Lists.newArrayList();
-    private String title;
-    private boolean hasText;
-    private ResourceLocation image;
-    private int[] imageData = new int[2];
+
+    private static final int textColor  = 0x000000; //black
+    private static final int titleColor = 0xFF0000; //red
+    private static final int entryColor = 0xFFFFFF; //white
+    private static final float mouseScrollMultiplier = 10.0F;
+
+    private ResourceLocation currentPage;                       //Page order:
+    private String title;                                       //title
+    private ResourceLocation image;                             //image
+    private int[] imageData = new int[2];                       //
+    private final List<Entry> entries = Lists.newArrayList();   //list entries
+    private boolean hasText;                                    //text
+    private String text;                                        //
+    private int listY = 0;
 
     private static ResourceLocation getPageFor(String page) {
         return new ResourceLocation(Reference.MODID, page);
@@ -93,6 +104,7 @@ public class GuiEncyclopedia extends GuiScreen {
             this.title = I18n.format("page." + this.pageNBT.getString("name") + ".title");
         }
         this.addButton(new GuiButton(0, (this.width + pageWidth) / 2 - 50, (this.height + pageHeight) / 2 - 30, 70, 20, ""));
+        this.text = I18n.format("page." + this.pageNBT.getString("name") + ".text");
     }
 
     @Override
@@ -112,22 +124,17 @@ public class GuiEncyclopedia extends GuiScreen {
         int x = (this.width - pageWidth) / 2;
         int y = 2;
         this.drawTexturedModalRect(x, y, 0, 0, pageWidth, pageHeight); //background
-
-        //TODO draw page by json definition
-        drawCenteredString(mc.fontRenderer, this.title, this.width / 2, y + 15, Color.RED.getRGB());
-
-        //(0,0) = top-left corner of page
-        x += 32;
-        y += 30;
-
-        if(!this.entries.isEmpty()) {
-            for(int index = 0; index < entries.size(); index++) {
-                Entry entry = entries.get(index);
-                entry.drawEntry(index, x, y + index * (entryHeight + 1), entryWidth, entryHeight, mouseX, mouseY, false, mc.getRenderPartialTicks());
-            }
-            y += this.entries.size() * (entryHeight + 1) + 2;
+        if(this.title != null) {
+            int fontHeight = fontRenderer.FONT_HEIGHT;
+            fontRenderer.FONT_HEIGHT = 10;
+            fontRenderer.drawString(this.title, (this.width - fontRenderer.getStringWidth(this.title)) / 2, y + 15, titleColor);
+            fontRenderer.FONT_HEIGHT = fontHeight;
         }
+        //(x,y) = top-left corner of actual page
+        x += 32;
+        y+= 10;
         if(this.image != null && this.image != TextureMap.LOCATION_MISSING_TEXTURE) {
+            y += 20;
             float width = this.pageNBT.getInteger("imageSize");
             if(width <= 0) width = entryWidth;
             float height = imageData[1] * (width / imageData[0]);
@@ -138,14 +145,31 @@ public class GuiEncyclopedia extends GuiScreen {
             GlStateManager.popMatrix();
             y+= height + 2;
         }
+        if(!this.entries.isEmpty()) {
+            for(int index = 0; index < entries.size(); index++) {
+                Entry entry = entries.get(index);
+                y += entryHeight + 1;
+                entry.drawEntry(index, x, y, entryWidth, entryHeight, mouseX, mouseY, false, mc.getRenderPartialTicks());
+            }
+            y +=  2;
+        }
         x += 1;
         if(this.hasText) {
-            fontRenderer.drawSplitString(I18n.format("page." + this.pageNBT.getString("name") + ".text"), x, y, entryWidth, Color.BLACK.getRGB());
+            int textWidth = entryWidth - 1;
+            int lineHeight = fontRenderer.FONT_HEIGHT + 1;
+            List<String> pageStrings = fontRenderer.listFormattedStringToWidth(this.text, textWidth);
+            int offsetLines = this.listY / lineHeight;
+            int drawIndex = 0;
+            for(int index = offsetLines; index < pageStrings.size(); index++) {
+                int drawY = y + drawIndex++ * lineHeight;
+                if(drawY > pageHeight - 25) break;
+                String text = pageStrings.get(index);
+                if(!text.isEmpty()) fontRenderer.drawString(text, x, drawY, textColor);
+            }
         }
         super.drawScreen(mouseX, mouseY, partialTicks);
-        for(int index = 0; index < entries.size(); index++) {
-            Entry entry = entries.get(index);
-            if(entry.hoverText != null && entry.isMouseOver(x, y + index * (entryHeight + 1), entryWidth, entryHeight, mouseX, mouseY)) {
+        for (Entry entry : entries) {
+            if (entry.hoverText != null && entry.isMouseOver(entryWidth, entryHeight, mouseX, mouseY)) {
                 drawHoveringText(entry.hoverText, mouseX, mouseY);
                 break;
             }
@@ -158,13 +182,20 @@ public class GuiEncyclopedia extends GuiScreen {
     }
 
     @Override
+    public void handleMouseInput() throws IOException {
+        super.handleMouseInput();
+        int scroll = (int) - (Math.signum(Mouse.getEventDWheel()) * mouseScrollMultiplier);
+        this.listY = MathHelper.clamp(this.listY + scroll, 0, fontRenderer.getWordWrappedHeight(this.text, entryWidth - 1) - 50);
+    }
+
+    @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         super.mouseClicked(mouseX, mouseY, mouseButton);
         int x = (this.width - pageWidth) / 2 + 32;
         int y = 32;
         for (int i = 0; i < this.entries.size(); i++) {
             Entry e = this.entries.get(i);
-            if(e.isMouseOver(x, y + entryHeight * i, entryWidth, entryHeight, mouseX, mouseY)) {
+            if(e.isMouseOver(entryWidth, entryHeight, mouseX, mouseY)) {
                 e.mousePressed(i, mouseX, mouseY, mouseButton, mouseX, mouseY);
                 break;
             }
@@ -177,6 +208,7 @@ public class GuiEncyclopedia extends GuiScreen {
         private ClickEvent clickEvent;
         private final String hoverText;
         private final ItemStack icon;
+        private int x, y;
 
         Entry(NBTTagCompound entryNBT) {
             String elementBaseText = "entry." + entryNBT.getString("name");
@@ -198,15 +230,17 @@ public class GuiEncyclopedia extends GuiScreen {
             else icon = ItemStack.EMPTY;
         }
 
-        boolean isMouseOver(int x, int y, int width, int height, int mouseX, int mouseY) {
+        boolean isMouseOver(int width, int height, int mouseX, int mouseY) {
             return mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
         }
 
         @Override
         public void drawEntry(int slotIndex, int x, int y, int listWidth, int slotHeight, int mouseX, int mouseY, boolean isSelected, float partialTicks) {
+            this.x = x;
+            this.y = y;
             drawRect(x, y - 1, x + listWidth, y, Color.WHITE.getRGB());
-            drawRect(x, y, x + listWidth, y + slotHeight, this.isMouseOver(x, y, listWidth, slotHeight, mouseX, mouseY) ? Color.BLACK.getRGB() : Color.GRAY.getRGB());
-            mc.fontRenderer.drawString(caption, x + 18, y + (slotHeight - mc.fontRenderer.FONT_HEIGHT) / 2, Color.WHITE.getRGB());
+            drawRect(x, y, x + listWidth, y + slotHeight, this.isMouseOver(listWidth, slotHeight, mouseX, mouseY) ? Color.BLACK.getRGB() : Color.GRAY.getRGB());
+            mc.fontRenderer.drawString(caption, x + 18, y + (slotHeight - mc.fontRenderer.FONT_HEIGHT) / 2, entryColor);
             if(!this.icon.isEmpty()) {
                 GlStateManager.pushMatrix();
                 RenderHelper.enableGUIStandardItemLighting();
