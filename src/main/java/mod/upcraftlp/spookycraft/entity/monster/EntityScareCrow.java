@@ -4,6 +4,7 @@ import mod.upcraftlp.spookycraft.Reference;
 import mod.upcraftlp.spookycraft.init.SpookySounds;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntityMob;
@@ -39,9 +40,13 @@ public class EntityScareCrow extends EntityMob {
 		this.targetTasks.addTask(3, new EntityScareCrow.AIScarecrowTarget<>(this, EntityIronGolem.class));
 	}
 
+
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
+		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(26.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8);
 
 	}
 

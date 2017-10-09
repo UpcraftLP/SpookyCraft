@@ -6,6 +6,7 @@ import mod.upcraftlp.spookycraft.client.renderer.skeletals.RenderSkeletalBat;
 import mod.upcraftlp.spookycraft.client.renderer.skeletals.RenderSkeletalChicken;
 import mod.upcraftlp.spookycraft.client.renderer.skeletals.RenderSkeletalCow;
 import mod.upcraftlp.spookycraft.client.renderer.skeletals.RenderSkeletalLlama;
+import mod.upcraftlp.spookycraft.client.renderer.skeletals.RenderSkeletalLlamaSpit;
 import mod.upcraftlp.spookycraft.client.renderer.skeletals.RenderSkeletalOcelot;
 import mod.upcraftlp.spookycraft.client.renderer.skeletals.RenderSkeletalParrot;
 import mod.upcraftlp.spookycraft.client.renderer.skeletals.RenderSkeletalPig;
@@ -13,6 +14,7 @@ import mod.upcraftlp.spookycraft.client.renderer.skeletals.RenderSkeletalRabbit;
 import mod.upcraftlp.spookycraft.client.renderer.skeletals.RenderSkeletalSheep;
 import mod.upcraftlp.spookycraft.client.renderer.skeletals.RenderSkeletalWolf;
 import mod.upcraftlp.spookycraft.entity.different.EntityMirror;
+import mod.upcraftlp.spookycraft.entity.different.EntitySkeletalLlamaSpit;
 import mod.upcraftlp.spookycraft.entity.monster.EntityScareCrow;
 import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalBat;
 import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalChicken;
@@ -69,6 +71,7 @@ public class ClientProxy extends CommonProxy {
 		rm.entityRenderMap.put(EntitySkeletalOcelot.class, new RenderSkeletalOcelot(rm));
 		rm.entityRenderMap.put(EntitySkeletalSheep.class, new RenderSkeletalSheep(rm));
 		rm.entityRenderMap.put(EntitySkeletalRabbit.class, new RenderSkeletalRabbit(rm));
+		rm.entityRenderMap.put(EntitySkeletalLlamaSpit.class, new RenderSkeletalLlamaSpit(rm));
 		
 	}
 

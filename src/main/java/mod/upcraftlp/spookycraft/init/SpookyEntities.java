@@ -5,13 +5,23 @@ import java.awt.Color;
 import mod.upcraftlp.spookycraft.Main;
 import mod.upcraftlp.spookycraft.Reference;
 import mod.upcraftlp.spookycraft.entity.different.EntityMirror;
-import mod.upcraftlp.spookycraft.entity.monster.*;
+import mod.upcraftlp.spookycraft.entity.different.EntitySkeletalLlamaSpit;
+import mod.upcraftlp.spookycraft.entity.monster.EntityScareCrow;
+import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalBat;
+import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalChicken;
+import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalCow;
+import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalLlama;
+import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalOcelot;
+import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalParrot;
+import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalPig;
+import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalRabbit;
+import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalSheep;
+import mod.upcraftlp.spookycraft.entity.monster.EntitySkeletalWolf;
 import net.minecraft.entity.EntityLiving.SpawnPlacementType;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class SpookyEntities {
@@ -34,13 +44,14 @@ public class SpookyEntities {
 		EntityRegistry.registerModEntity(getEntityResource("SkeletalSheep"), EntitySkeletalSheep.class, "SkeletalSheep", entityID++, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
 		EntityRegistry.registerModEntity(getEntityResource("SkeletalOcelot"), EntitySkeletalOcelot.class, "SkeletalOcelot", entityID++, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
 		EntityRegistry.registerModEntity(getEntityResource("SkeletalLlama"), EntitySkeletalLlama.class, "SkeletalLlama", entityID++, Main.INSTANCE, 80, 3, false, eggPrimary, eggSecondary);
+		EntityRegistry.registerModEntity(getEntityResource("LlamaSpit"), EntitySkeletalLlamaSpit.class, "LlamaSpit", entityID++, Main.INSTANCE, 80, 3, false);
 
 		/*
 		 * We want our mob to spawn in biomes. If you don't add this then it
 		 * will not spawn automatically but you can of course still make it
 		 * spawn manually
 		 */
-		EntityRegistry.addSpawn(EntityScareCrow.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+		EntityRegistry.addSpawn(EntityScareCrow.class, 5, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
 		EntityRegistry.addSpawn(EntitySkeletalBat.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
 		EntityRegistry.addSpawn(EntitySkeletalChicken.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
 		EntityRegistry.addSpawn(EntitySkeletalCow.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
