@@ -1,0 +1,55 @@
+#PARSE_ESCAPES
+#########################
+#Blocks
+tile.haunted_pumpkin.name=Citrouille hantée
+
+#Items
+item.glass_string.name=Ficelle de verre
+item.candy_bag.name=Sac de bonbons
+item.chocolate_bar.name=Barre de chocolat
+item.candy_corn.name=Bonbons au maïs
+
+#Fluids
+fluid.spookycraft.bone_milk=Lait d'os
+
+#Misc
+itemGroup.spooky.name=SpookyCraft
+item.encyclopedia.name=Encyclopedie des arcanes
+item.bone_milk_bottle.name=Bouteille de lait d'os
+
+#Entities
+entity.ScareCrow.name=Épouvantail
+entity.SkeletalBat.name=Chauve-souris squelettique
+entity.SkeletalChicken.name=Poulet squelettique
+entity.SkeletalCow.name=Vache squelettique
+entity.SkeletalParrot.name=Perroquet squelettique
+entity.SkeletalPig.name=Cochon squelettique
+entity.SkeletalWolf.name=Loup squelettique
+entity.SkeletalOcelot.name=Ocelot squelettique
+entity.SkeletalRabbit.name=Lapin squelettique
+entity.SkeletalSheep.name=Mouton squelettique
+
+#Encyclopedia
+button.back.name=Retour
+button.close.name=Fermer
+button.index.name=Sommaire
+
+#Encyclopedia: Index
+page.index.title=Sommaire
+
+entry.candy.caption=Bonbon
+entry.candy.hover=Miam, sucré !
+
+entry.pumpkins.caption=Citrouilles
+entry.pumpkins.hover=Décorations frissonnantes
+
+entry.skeletals.caption=Les Squelettiques
+entry.skeletals.hover=D'effrayants camarades
+
+#Encyclopedia entries
+page.pumpkins.title=Citrouilles
+page.pumpkins.text=Les citrouilles sont une bonne décoration !\nCliquez-droit sur une citrouille avec une torche pour la changer en lanterne digne d'un film d'horreur.\nMais faites attention : Si vous ne portez pas de citrouille en couvre-chef le soir, vous ne vivrez probablement pas pour voir l'aube...
+page.candy.title=Doux bonbons
+page.candy.text=Le sac de bonbons est un item exclusif qui est assez difficile à avoir !\nLa seule méthode connue est de frapper un cochon squelettique avec de la foudre, ce qui le métamorphosera en squelette wither tenant dans sa main le sac de bonbon !\n§cAstuce: §r§oUtilisez Butin\n\n§rLe bonbon au maïs est une gâterie simple, il est réputé se loger dans les os des Squelettiques. Quand vous en frappez un, vous pourriez arracher un bonbon, mais faites attention, il n'aimera pas ça !
+page.skeletals.title=Les Squelettiques
+page.skeletals.text=Les Squelettiques sont les âmes sans repos des animaux que vous avez chassés et tués. Ils sont ici pour prendre leur revanche sur ce que vous leur avez fait.\nVos animaux de compagnie morts vont aussi venir vous hanter, alors réfléchissez à ce que vous tuez !\n - Ne brûle pas à la lumière du jour mais est seulement agressif pendant la nuit\n - Les Vaches Squelettiques sont connues pour leur lait pur.
