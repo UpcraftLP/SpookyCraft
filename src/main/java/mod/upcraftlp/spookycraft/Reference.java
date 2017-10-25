@@ -24,7 +24,7 @@ public class Reference {
     //META Information
     public static final String MODNAME = "SpookyCraft";
     public static final String MODID = "spookycraft";
-    public static final String DEPENDENCIES = "required-after:forge@[14.23.0.2489,);required-after:craftdevcore@[2.2.7,)";
+    public static final String DEPENDENCIES = "required-after:forge@[14.23.0.2489,);required-after:craftdevcore@[2.2.8,)";
     public static final String UPDATE_JSON = "https://gist.githubusercontent.com/UpcraftLP/c59fa5fa48bf4b424c519936b2d9e037/raw";
     public static final String WEBSITE = "https://minecraft.curseforge.com/projects/spookycraft";
 
