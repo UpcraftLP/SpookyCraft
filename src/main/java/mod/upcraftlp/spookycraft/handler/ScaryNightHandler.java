@@ -2,8 +2,9 @@ package mod.upcraftlp.spookycraft.handler;
 
 import com.google.common.collect.Lists;
 import core.upcraftlp.craftdev.api.util.Utils;
+import mod.upcraftlp.spookycraft.ModConfig;
 import mod.upcraftlp.spookycraft.Reference;
-import mod.upcraftlp.spookycraft.entity.monster.EntityScareCrow;
+import mod.upcraftlp.spookycraft.entity.monster.*;
 import mod.upcraftlp.spookycraft.util.EntityUtils;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityEnderman;
@@ -12,6 +13,7 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -29,7 +31,19 @@ public class ScaryNightHandler {
             EntitySkeleton.class,
             EntityZombie.class,
             EntityEnderman.class,
-            EntityScareCrow.class
+
+            EntityScareCrow.class,
+
+            EntitySkeletalLlama.class,
+            EntitySkeletalOcelot.class,
+            EntitySkeletalBat.class,
+            EntitySkeletalChicken.class,
+            EntitySkeletalCow.class,
+            EntitySkeletalParrot.class,
+            EntitySkeletalPig.class,
+            EntitySkeletalRabbit.class,
+            EntitySkeletalSheep.class,
+            EntitySkeletalWolf.class
             //TODO different vanilla mobs?
             //TODO custom mobs
     );
@@ -38,7 +52,7 @@ public class ScaryNightHandler {
             new ItemStack(Blocks.PUMPKIN)
     );
     static {
-        for(int i = 0; i <= 5; i++) {
+        for(int i = 0; i <= 5; i++) { //add mob heads as valid helmets
             if(i == 3) continue; //no player heads allowed
             ALLOWED_HATS.add(new ItemStack(Blocks.SKULL, 1, i));
         }
@@ -47,7 +61,7 @@ public class ScaryNightHandler {
     @SubscribeEvent
     public static void onPlayerUpdate(TickEvent.PlayerTickEvent event) {
         EntityPlayer player = event.player;
-        if(player.isCreative()) return;
+        if(!ModConfig.pumpkinHats || player.isCreative()) return;
         World world = player.world;
         ItemStack stack = player.inventory.armorInventory.get(3);
 
@@ -57,8 +71,13 @@ public class ScaryNightHandler {
             for(int i = 0; !hasHat && i < ALLOWED_HATS.size(); i++) {
                 hasHat = ALLOWED_HATS.get(i).isItemEqual(stack);
             }
-            if(!hasHat && world.getTotalWorldTime() % (170) == 0 && world.rand.nextDouble() < 0.1D) {
-                EntityUtils.summonEntitiesAroundPos(Utils.getRandomElementFromList(SPAWN_LIST), world, player.getPosition(), 40, 4, 9, false);
+            int difficultyLevel = world.getDifficulty().getDifficultyId();
+            if(difficultyLevel > 0) {
+                DifficultyInstance difficulty = world.getDifficultyForLocation(player.getPosition());
+                float additionalDifficulty = difficulty.getClampedAdditionalDifficulty();
+                if(!hasHat && world.getTotalWorldTime() % (int) (1500.0F / additionalDifficulty) / difficultyLevel == 0 && world.rand.nextDouble() < 0.1D * additionalDifficulty) {
+                    EntityUtils.summonEntitiesAroundPos(Utils.getRandomElementFromList(SPAWN_LIST), world, player.getPosition(), 40, 4, 9, false);
+                }
             }
         }
     }

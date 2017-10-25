@@ -1,10 +1,11 @@
 package mod.upcraftlp.spookycraft.handler;
 
+import core.upcraftlp.craftdev.api.util.Utils;
+import mod.upcraftlp.spookycraft.ModConfig;
 import mod.upcraftlp.spookycraft.block.BlockHauntedPumpkin;
 import mod.upcraftlp.spookycraft.block.fluid.BlockFluidBoneMilk;
 import mod.upcraftlp.spookycraft.init.SpookyBlocks;
 import mod.upcraftlp.spookycraft.init.SpookyItems;
-import mod.upcraftlp.spookycraft.init.SpookySounds;
 import mod.upcraftlp.spookycraft.util.EntityUtils;
 import net.minecraft.block.BlockPumpkin;
 import net.minecraft.block.material.Material;
@@ -16,6 +17,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -68,8 +70,9 @@ public class PlayerHandler {
 	public static void onBreakSpookyBlock(BlockEvent.BreakEvent event) {
 		World world = event.getWorld();
 		BlockPos pos = event.getPos();
-		if (!world.isRemote && world.getBlockState(pos).getMaterial() == Material.ROCK && ScaryNightHandler.isNightTime(world)) {
-			if(world.rand.nextDouble() < 0.1D) world.playSound(null, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, SpookySounds.SCARECROW_AMBIENT, SoundCategory.AMBIENT,30, 10);
+		if (ModConfig.soundsOnBlockBreak && !world.isRemote && world.getBlockState(pos).getMaterial() == Material.ROCK && ScaryNightHandler.isNightTime(world)) {
+			SoundEvent soundEvent = Utils.getRandomElementFromList(BlockHauntedPumpkin.SOUNDS);
+			if(soundEvent != null) if(world.rand.nextDouble() < 0.1D) world.playSound(null, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, soundEvent, SoundCategory.AMBIENT,30, 10);
 		}
 	}
 }

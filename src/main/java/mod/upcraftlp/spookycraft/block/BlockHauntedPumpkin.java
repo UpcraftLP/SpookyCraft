@@ -33,7 +33,7 @@ import java.util.Random;
  */
 public class BlockHauntedPumpkin extends Block {
 
-    private static final List<SoundEvent> SOUNDS = Lists.newArrayList(
+    public static final List<SoundEvent> SOUNDS = Lists.newArrayList(
             SoundEvents.ENTITY_ELDER_GUARDIAN_CURSE,
             SoundEvents.AMBIENT_CAVE,
             SoundEvents.ENTITY_SKELETON_AMBIENT,

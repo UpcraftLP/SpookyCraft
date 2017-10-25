@@ -3,6 +3,7 @@ package mod.upcraftlp.spookycraft.init;
 import java.awt.Color;
 
 import mod.upcraftlp.spookycraft.Main;
+import mod.upcraftlp.spookycraft.ModConfig;
 import mod.upcraftlp.spookycraft.Reference;
 import mod.upcraftlp.spookycraft.entity.different.EntityMirror;
 import mod.upcraftlp.spookycraft.entity.different.EntitySkeletalLlamaSpit;
@@ -51,18 +52,17 @@ public class SpookyEntities {
 		 * will not spawn automatically but you can of course still make it
 		 * spawn manually
 		 */
-		EntityRegistry.addSpawn(EntityScareCrow.class, 5, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
-		EntityRegistry.addSpawn(EntitySkeletalBat.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
-		EntityRegistry.addSpawn(EntitySkeletalChicken.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
-		EntityRegistry.addSpawn(EntitySkeletalCow.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
-		EntityRegistry.addSpawn(EntitySkeletalParrot.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.JUNGLE,
-				Biomes.JUNGLE_EDGE, Biomes.JUNGLE_HILLS, Biomes.MUTATED_JUNGLE, Biomes.MUTATED_JUNGLE_EDGE);
-		EntityRegistry.addSpawn(EntitySkeletalPig.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
-		EntityRegistry.addSpawn(EntitySkeletalWolf.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
-		EntityRegistry.addSpawn(EntitySkeletalRabbit.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
-		EntityRegistry.addSpawn(EntitySkeletalOcelot.class, 10, 1, 4, EnumCreatureType.MONSTER, Biomes.JUNGLE, Biomes.JUNGLE_EDGE, Biomes.JUNGLE_HILLS, Biomes.MUTATED_JUNGLE, Biomes.MUTATED_JUNGLE_EDGE);
-		EntityRegistry.addSpawn(EntitySkeletalSheep.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
-		EntityRegistry.addSpawn(EntitySkeletalLlama.class, 10, 1, 1, EnumCreatureType.MONSTER, Biomes.SAVANNA);
+		EntityRegistry.addSpawn(EntityScareCrow.class, ModConfig.mobSpawns.scareCrow, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+		EntityRegistry.addSpawn(EntitySkeletalBat.class, ModConfig.mobSpawns.bat, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+		EntityRegistry.addSpawn(EntitySkeletalChicken.class, ModConfig.mobSpawns.chicken, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+		EntityRegistry.addSpawn(EntitySkeletalCow.class, ModConfig.mobSpawns.cow, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+		EntityRegistry.addSpawn(EntitySkeletalParrot.class, ModConfig.mobSpawns.parrot, 1, 1, EnumCreatureType.MONSTER, Biomes.JUNGLE, Biomes.JUNGLE_EDGE, Biomes.JUNGLE_HILLS, Biomes.MUTATED_JUNGLE, Biomes.MUTATED_JUNGLE_EDGE);
+		EntityRegistry.addSpawn(EntitySkeletalPig.class, ModConfig.mobSpawns.pig, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+		EntityRegistry.addSpawn(EntitySkeletalWolf.class, ModConfig.mobSpawns.wolf, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+		EntityRegistry.addSpawn(EntitySkeletalRabbit.class, ModConfig.mobSpawns.rabbit, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+		EntityRegistry.addSpawn(EntitySkeletalOcelot.class, ModConfig.mobSpawns.ocelot, 1, 4, EnumCreatureType.MONSTER, Biomes.JUNGLE, Biomes.JUNGLE_EDGE, Biomes.JUNGLE_HILLS, Biomes.MUTATED_JUNGLE, Biomes.MUTATED_JUNGLE_EDGE);
+		EntityRegistry.addSpawn(EntitySkeletalSheep.class, ModConfig.mobSpawns.sheep, 1, 1, EnumCreatureType.MONSTER, Biomes.PLAINS);
+		EntityRegistry.addSpawn(EntitySkeletalLlama.class, ModConfig.mobSpawns.llama, 1, 1, EnumCreatureType.MONSTER, Biomes.SAVANNA);
 
 		/*
 		 * Mob Placement
