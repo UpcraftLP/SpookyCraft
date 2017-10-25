@@ -43,6 +43,9 @@ public class ItemBottleBoneMilk extends Item {
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
         if(entityLiving instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entityLiving;
+            player.setHealth(player.getMaxHealth());
+            player.setAbsorptionAmount(player.getAbsorptionAmount() + 5);
+            player.getFoodStats().addStats(25, 3.0F);
             player.curePotionEffects(new ItemStack(Items.MILK_BUCKET));
             player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 1800, 1));
             player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 600, 5));
