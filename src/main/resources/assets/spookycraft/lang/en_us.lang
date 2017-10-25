@@ -8,14 +8,15 @@ item.glass_string.name=Glass String
 item.candy_bag.name=Candy Bag
 item.chocolate_bar.name=Chocolate Bar
 item.candy_corn.name=Candy Corn
+item.encyclopedia.name=Arcane Encyclopedia
+item.bone_milk_bottle.name=Bottle of Bone Milk
 
 #Fluids
 fluid.spookycraft.bone_milk=Bone Milk
 
 #Misc
 itemGroup.spooky.name=SpookyCraft
-item.encyclopedia.name=Arcane Encyclopedia
-item.bone_milk_bottle.name=Bottle of Bone Milk
+config.spookycraft.title=SpookyCraft
 
 #Entities
 entity.ScareCrow.name=Scarecrow
