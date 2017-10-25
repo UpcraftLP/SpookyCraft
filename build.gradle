@@ -139,7 +139,7 @@ dependencies {
     runtime "mezz.jei:jei_${project.mc_version}:${project.jei_version}"
 
     //craftdev-core
-    compile "craftdev-core:craftdev-core-${project.mc_version}:${project.core_version}:deobf"
+    deobfCompile "craftdev-core:craftdev-core:${project.mc_version}:${project.core_version}"
 }
 tasks.build.dependsOn signJar
 tasks.curseforge.dependsOn build
@@ -165,6 +165,10 @@ curseforge {
         //addArtifact javadocJar
         //addArtifact sourceJar
         //addArtifact apiJar
+
+        addGameVersion '1.12'
+        addGameVersion '1.12.1'
+        addGameVersion '1.12.2'
 
         mainArtifact(jar) {
             displayName = "SpookyCraft v${project.mod_version} MC${project.mc_version}"
