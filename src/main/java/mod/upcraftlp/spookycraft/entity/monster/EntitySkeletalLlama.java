@@ -203,12 +203,12 @@ public class EntitySkeletalLlama extends EntitySkeletal implements IRangedAttack
 				}
 			}
 
-			IBlockState iblockstate = this.world.getBlockState(
-					new BlockPos(this.posX, this.posY - 0.2D - (double) this.prevRotationYaw, this.posZ));
+			BlockPos position = new BlockPos(this.posX, this.posY - 0.2D - (double) this.prevRotationYaw, this.posZ);
+			IBlockState iblockstate = this.world.getBlockState(position);
 			Block block = iblockstate.getBlock();
 
 			if (iblockstate.getMaterial() != Material.AIR && !this.isSilent()) {
-				SoundType soundtype = block.getSoundType();
+				SoundType soundtype = block.getSoundType(iblockstate, world, position, this);
 				this.world.playSound(null, this.posX, this.posY, this.posZ, soundtype.getStepSound(),
 						this.getSoundCategory(), soundtype.getVolume() * 0.5F, soundtype.getPitch() * 0.75F);
 			}
