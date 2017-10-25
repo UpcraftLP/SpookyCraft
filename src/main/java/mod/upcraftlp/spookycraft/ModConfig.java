@@ -11,7 +11,7 @@ import static mod.upcraftlp.spookycraft.Reference.*;
 /**
  * @author UpcraftLP
  */
-@Config(modid = MODID, name = MODNAME)
+@Config(modid = MODID, name = "craftdevmods/" + MODNAME) //--> /config/craftdevmods/SpookyCraft.cfg
 @Config.LangKey("config." + MODID + ".title")
 public class ModConfig {
 
@@ -22,7 +22,7 @@ public class ModConfig {
     public static boolean pumpkinHats = true;
 
     @Config.Comment("en/disable spooky sounds on block break")
-    public static boolean soundsOnBlockBreak;
+    public static boolean soundsOnBlockBreak = true;
 
     @Config.RequiresMcRestart
     @Config.Comment("Configure the spawn chances for each mob individually. The higher the values, the higher the chance of spawning each mob. 0 to disable.")
@@ -32,24 +32,24 @@ public class ModConfig {
 
         public int scareCrow = 5;
 
-        public int bat = 10;
-        public int chicken = 10;
-        public int cow = 10;
-        public int parrot = 10;
-        public int pig = 10;
-        public int wolf = 10;
-        public int rabbit = 10;
-        public int ocelot = 10;
-        public int sheep = 10;
-        public int llama = 10;
+        public int bat = 20;
+        public int chicken = 90;
+        public int cow = 80;
+        public int parrot = 40;
+        public int pig = 60;
+        public int wolf = 45;
+        public int rabbit = 35;
+        public int ocelot = 25;
+        public int sheep = 65;
+        public int llama = 50;
 
     }
 
     @Mod.EventBusSubscriber
-    private static class Handler {
+    public static class Handler {
 
         @SubscribeEvent
-        private static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
+        public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
             if(event.getModID().equals(Reference.MODID)) {
                 ConfigManager.sync(Reference.MODID, Config.Type.INSTANCE);
             }
