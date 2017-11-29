@@ -2,6 +2,7 @@
 Version 1.0.3
 ------------------------------------------------------
 - fix for broken water bottles/potions
+- added bulgarian translation
 
 ------------------------------------------------------
 Version 1.0.2
