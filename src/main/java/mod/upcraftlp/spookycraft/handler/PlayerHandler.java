@@ -16,6 +16,7 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -34,11 +35,12 @@ public class PlayerHandler {
 
 	@SubscribeEvent
 	public static void onRightClick(PlayerInteractEvent.RightClickItem event) {
-		if(event.getItemStack().getItem() == Items.GLASS_BOTTLE) {
+		ItemStack stack = event.getItemStack();
+		if(stack.getItem() == Items.GLASS_BOTTLE && PotionUtils.getEffectsFromStack(stack).isEmpty()) {
 			World world = event.getWorld();
 			EntityPlayer player = event.getEntityPlayer();
 			RayTraceResult result = EntityUtils.rayTracePlayer(world, player, true);
-			if(result.typeOfHit == RayTraceResult.Type.BLOCK) {
+			if(result != null && result.typeOfHit == RayTraceResult.Type.BLOCK) {
 				BlockPos pos = result.getBlockPos();
 				if(world.getBlockState(pos).getBlock() instanceof BlockFluidBoneMilk && world.isBlockModifiable(event.getEntityPlayer(), pos) && world.getBlockState(pos).getValue(BlockFluidBoneMilk.LEVEL) == 0) {
 					if(!world.isRemote) {
